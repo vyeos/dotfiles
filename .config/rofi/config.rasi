@@ -1,0 +1,12 @@
+// configuration {
+// @modi: "drun,run";
+// @theme: "rounded-dark";
+// }
+//
+// @theme  {
+// window { width: 32%; border-radius: 12px; background: #2e3440; }
+// listview { spacing: 8px; }
+// entry { background: #3b4252; padding: 6px; border-radius: 8px; }
+// element { padding: 6px; border-radius: 8px; }
+// element selected { background: #88c0d0; color: #2e3440; }
+// }

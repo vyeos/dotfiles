@@ -1,133 +1,141 @@
 * {
   border: none;
-  border-radius: 0;
-  min-height: 0;
-  font-family: JetBrainsMono Nerd Font;
+  font-family: "JetBrainsMono Nerd Font";
   font-size: 13px;
+  font-weight: bold;
 }
 
 window#waybar {
-  background-color: #181825;
-  transition-property: background-color;
-  transition-duration: 0.5s;
+  background: transparent;
 }
 
-window#waybar.hidden {
-  opacity: 0.5;
-}
-
-#workspaces {
-  background-color: transparent;
-}
-
-#workspaces button {
-  all: initial;
-  /* Remove GTK theme values (waybar #1351) */
-  min-width: 0;
-  /* Fix weird spacing in materia (waybar #450) */
-  box-shadow: inset 0 -3px transparent;
-  /* Use box-shadow instead of border so the text isn't offset */
-  padding: 6px 18px;
-  margin: 6px 3px;
-  border-radius: 4px;
-  background-color: #1e1e2e;
+#clock,
+#custom-power,
+#network,
+#bluetooth,
+#pulseaudio,
+#battery,
+#backlight {
+  background: #1e1e2e;
+  padding: 0 14px;
+  margin: 4px 2px;
+  border-radius: 15px;
+  border: 1px solid #313244;
   color: #cdd6f4;
 }
 
-#workspaces button.active {
-  color: #1e1e2e;
-  background-color: #cdd6f4;
-}
-
-#workspaces button:hover {
-  box-shadow: inherit;
-  text-shadow: inherit;
-  color: #1e1e2e;
-  background-color: #cdd6f4;
-}
-
-#workspaces button.urgent {
-  background-color: #f38ba8;
-}
-
-#memory,
-#custom-power,
-#battery,
-#backlight,
-#wireplumber,
-#network,
-#clock,
-#tray {
-  border-radius: 4px;
-  margin: 6px 3px;
-  padding: 6px 12px;
-  background-color: #1e1e2e;
-  color: #181825;
-}
-
-#custom-power {
-  margin-right: 6px;
-}
-
-#custom-logo {
-  padding-right: 7px;
-  padding-left: 7px;
-  margin-left: 5px;
-  font-size: 15px;
-  border-radius: 8px 0px 0px 8px;
-  color: #1793d1;
-}
-
-#memory {
-  background-color: #fab387;
-}
-
-#battery {
-  background-color: #f38ba8;
-}
-
-#battery.warning,
-#battery.critical,
-#battery.urgent {
-  background-color: #ff0000;
-  color: #FFFF00;
-}
-
-#battery.charging {
-  background-color: #a6e3a1;
-  color: #181825;
-}
-
-#backlight {
-  background-color: #fab387;
-}
-
-#wireplumber {
-  background-color: #f9e2af;
+#clock {
+  color: #98c379;
 }
 
 #network {
-  background-color: #94e2d5;
-  padding-right: 17px;
+  color: #6272a4; /* Default: Blue/Grey (Scanning/Unknown) */
+}
+#network.wifi,
+#network.ethernet {
+  color: #98c379; /* Connected: Green */
+}
+#network.disconnected {
+  color: #45475a; /* Disconnected: Dim Grey */
 }
 
-#clock {
-  font-family: JetBrainsMono Nerd Font;
-  background-color: #cba6f7;
+#bluetooth {
+  color: #98c379; /* Connected: Green */
+}
+#bluetooth.disabled,
+#bluetooth.off {
+  color: #45475a; /* Off: Dim Grey */
 }
 
+#pulseaudio {
+  color: #98c379; /* Active: Green */
+}
+#pulseaudio.muted {
+  color: #45475a; /* Muted: Dim Grey */
+}
+#pulseaudio.microphone {
+  color: #98c379;
+}
+#pulseaudio.microphone.muted {
+  color: #45475a;
+}
+
+#backlight {
+  color: #98c379; /* Always active */
+}
+
+#battery {
+  color: #61afef; /* 20% - 80%: Blue */
+}
+
+#battery.charging,
+#battery.plugged {
+  color: #98c379; /* Charging: Green */
+}
+
+#battery.warning:not(.charging) {
+  color: #e5c07b; /* 10-20%: Yellow */
+}
+
+#battery.critical:not(.charging) {
+  color: #e06c75; /* < 10%: Red */
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+#battery.full {
+  color: #98c379;
+}
+
+/* -- POWER BUTTON -- */
 #custom-power {
-  background-color: #f2cdcd;
+  color: #f38ba8;
+  padding-right: 18px;
 }
 
+/* 3. WORKSPACES */
 
-tooltip {
-  border-radius: 8px;
-  padding: 15px;
-  background-color: #131822;
+#workspaces {
+  background: transparent;
+  padding: 0;
 }
 
-tooltip label {
-  padding: 5px;
-  background-color: #131822;
+#workspaces button {
+  background: #1e1e2e;
+  padding: 0 7px;
+  margin: 4px 2px;
+  border-radius: 15px;
+  border: 1px solid #313244;
+  box-shadow: none;
+  text-shadow: none;
+  transition: all 0.3s ease;
+  opacity: 0.6;
+  color: transparent;
+}
+
+#workspaces button.active {
+  background: #98c379;
+  color: #1e1e2e;
+  min-width: 40px;
+  min-height: 10px;
+  border-radius: 20px;
+  opacity: 1;
+}
+
+#workspaces button:hover {
+  background: #cdd6f4;
+  color: #1e1e2e;
+  min-width: 40px;
+  border-radius: 12px;
+  opacity: 1;
+}
+
+@keyframes blink {
+  to {
+    background-color: #f38ba8;
+    color: #1e1e2e;
+  }
 }

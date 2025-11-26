@@ -54,7 +54,7 @@ contentbox {
 
 /* ── Imagebox ────────────────────────────── */
 imagebox {
-  background-image: url("~/.config/rofi/image.png");
+  background-image: url("~/.config/hypr/wallpapers/japan.jpg");
   background-repeat: false;
   size: 300px 625px;
 }

@@ -42,7 +42,8 @@ return {
 			},
 		})
 
-		local servers = { "pyright", "ts_ls", "html", "cssls", "clangd", "gopls", "pylsp", "tailwindcss" }
+		-- local servers = { "pyright", "ts_ls", "html", "cssls", "clangd", "gopls", "pylsp", "tailwindcss" }
+		local servers = { "pyright", "ts_ls", "html", "cssls", "gopls", "pylsp", "tailwindcss" }
 		for _, server in ipairs(servers) do
 			vim.lsp.config(server, {
 				capabilities = capabilities,
@@ -60,7 +61,7 @@ return {
 				"cssls",
 				"lua_ls",
 				"pylsp",
-				"clangd",
+				-- "clangd", installed manually in arch
 				"tailwindcss",
 			},
 			automatic_enable = true,

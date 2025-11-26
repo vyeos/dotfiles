@@ -1,7 +1,7 @@
 #! /usr/bin/bash
 
 
-sudo pacman -S --noconfirm neovim git curl htop base-devel waybar rofi cliphist wl-clipboard ripgrep lazygit
+sudo pacman -Syu --noconfirm neovim git curl htop base-devel waybar rofi cliphist wl-clipboard ripgrep lazygit nodejs npm
 
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
@@ -11,6 +11,6 @@ rm -rf yay-bin
 
 pacman -S --noconfirm hypridle  hyprlock dunst libnotify fastfetch ttf-firacode-nerd ttf-jetbrains-mono-nerd pamixer cliphist slurp grim github-cli ntfs-3g noto-fonts-emoji
 
-yay -S --noconfirm brave-bin dunst hyprpaper light swappy pulseaudio swaylock-effects-git hyprpicker-git 
+yay -S --noconfirm brave-bin dunst hyprpaper light swappy pulseaudio swaylock-effects-git hyprpicker-git ghostty-git
 
 sudo pacman -Syu --noconfirm

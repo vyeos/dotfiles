@@ -1,12 +1,13 @@
-// configuration {
-// @modi: "drun,run";
-// @theme: "rounded-dark";
-// }
-//
-// @theme  {
-// window { width: 32%; border-radius: 12px; background: #2e3440; }
-// listview { spacing: 8px; }
-// entry { background: #3b4252; padding: 6px; border-radius: 8px; }
-// element { padding: 6px; border-radius: 8px; }
-// element selected { background: #88c0d0; color: #2e3440; }
-// }
+/* ── Rofi Config ──────────────────────────────
+   Location: ~/.config/rofi/config.rasi
+   Description: Basic configuration + theme import
+   ─────────────────────────────────────────── */
+
+configuration {
+    modi: "drun,run";                    // Available modes
+    show-icons: true;                    // Show app icons
+    font: "JetBrainsMono Nerd Font 12";  // Global font
+}
+
+/* Import active theme */
+@theme "~/.config/rofi/theme.rasi"

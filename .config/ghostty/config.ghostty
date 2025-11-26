@@ -1,1 +1,11 @@
+theme=
+font-family = JetBrainsMono Nerd Font
+font-size = 18
+window-padding-x = 10
 
+# background=#000
+background-image-opacity = .2
+background-image-position = center
+background-image-fit = cover
+background-image-repeat = false
+background-image = "/Users/rudra/Library/CloudStorage/GoogleDrive-rudranpatel0980@gmail.com/My Drive/Wallpapers/yayayayayaya.jpg"

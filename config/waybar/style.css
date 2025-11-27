@@ -98,39 +98,21 @@ window#waybar {
 
 /* 3. WORKSPACES */
 
-#workspaces {
-  background: transparent;
-  padding: 0;
-}
+/* --- WORKSPACES (Omarchy Style) --- */
 
 #workspaces button {
-  background: #1e1e2e;
-  padding: 0 7px;
-  margin: 4px 2px;
-  border-radius: 15px;
-  border: 1px solid #313244;
-  box-shadow: none;
-  text-shadow: none;
-  transition: all 0.3s ease;
-  opacity: 0.6;
-  color: transparent;
+  all: initial;
+  padding: 0 6px;
+  margin: 0 1.5px;
+  min-width: 9px;
 }
 
 #workspaces button.active {
-  background: #98c379;
-  color: #1e1e2e;
-  min-width: 40px;
-  min-height: 10px;
-  border-radius: 20px;
-  opacity: 1;
+  color: #98c379; /* Connected: Green */
 }
 
-#workspaces button:hover {
-  background: #cdd6f4;
-  color: #1e1e2e;
-  min-width: 40px;
-  border-radius: 20px;
-  opacity: 1;
+#workspaces button.empty {
+  opacity: 0.5;
 }
 
 @keyframes blink {

@@ -1,47 +1,46 @@
-# UI Settings
+force_keyboard_focus = true
+selection_wrap = true
+
 [ui]
-fullscreen = true
+hide_action_hints = true
 
-[ui.anchors]
-top = true
-left = true
-bottom = true
-right = true
+[placeholders]
+"default" = { input = " Search...", list = "No Results" }
 
-# List Settings
-[list]
-show_initial_entries = true
-max_entries = 50
+[keybinds]
+quick_activate = []
 
-# Search Bar
-[search]
-placeholder = "Search Applications..."
+[providers]
+max_results = 50
+# CRITICAL FIX: Added "commands" and "runner" to this list
+default = [
+  "commands",
+  "desktopapplications",
+  "runner",
+  "websearch",
+]
 
-# Activation Keys (for selecting items quickly)
-[activation_mode]
-labels = "jkl;asdf"
+[[providers.prefixes]]
+prefix = "/"
+provider = "files" # Swapped to files (standard convention), change back to providerlist if you prefer
 
-[builtins.applications]
-weight = 5
-show_generic = true # Shows "Web Browser" instead of just "Firefox" sometimes
-
-[builtins.runner]
-weight = 1
-icon = "utilities-terminal"
-name = "runner"
-
-[builtins.websearch]
-weight = 1
-icon = "globe"
-name = "google"
+[[providers.prefixes]]
 prefix = "?"
+provider = "websearch"
 
-# --- YOUR CUSTOM COMMANDS ---
+[[providers.prefixes]]
+prefix = ":"
+provider = "commands"
 
-[[custom_commands]]
+[[providers.prefixes]]
+prefix = "="
+provider = "calc"
+
+# --- CUSTOM COMMANDS ---
+# Changed from [[custom_commands]] to [[commands]]
+[[commands]]
 name = "Create Web App"
 description = "Turn a website into a desktop app (Omarchy Style)"
 cmd = "bash ~/.local/bin/create-webapp.sh"
 keywords = ["webapp", "create", "site", "pwa"]
 icon = "application-default-icon"
-weight = 10 # High weight keeps it visible

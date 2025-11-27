@@ -1,102 +1,107 @@
-/* ── Rofi Theme ──────────────────────────────
-   °˖* ૮(  • ᴗ ｡)っ🍸  pewdiepie/archdaemon/dionysh
-   shhheersh
-   Vers 1.0
-   Description: Custom styling for Rofi launcher 
-   ─────────────────────────────────────────── */
-
 /* Global defaults */
 * {
-  font: "JetBrainsMono Nerd Font 11";
-  blur: true;
-  padding: 10px;
+  font: "JetBrainsMono Nerd Font 14"; /* Slightly larger for fullscreen */
+  
+  /* --- COLORS --- */
+  bg-col:  #0a1914;      /* Dark Forest Green Base */
+  bg-col-light: #1e1e2e; /* Slightly lighter for elements */
+  border-col: #a6e3a1;   /* Bright Green Accent */
+  selected-col: #a6e3a1; /* Green Selection */
+  fg-col: #cdd6f4;       /* White Text */
+  fg-col2: #1e1e2e;      /* Dark text for selected items */
+  
   background-color: transparent;
-  border-radius: 0px;  // remove default rounding globally
+  text-color: @fg-col;
+  margin: 0px;
+  padding: 0px;
+  spacing: 0px;
 }
 
 /* ── Window ──────────────────────────────── */
 window {
-  width: 750px;
-  height: 625px;
+  fullscreen: true;     /* FORCE FULL SCREEN */
+  width: 100%;
+  height: 100%;
   location: center;
-  blur: true;
-  border: 2px;
-  border-radius: 3px;
-  border-color: #61afef;
-  background-color: transparent;  // let Hyprland handle opacity
-  padding: 0px;
-  margin: 30px 50px;
+  
+  background-color: rgba(10, 25, 20, 0.95); /* Dark Green with slight transparency */
+  border: 0px;          /* No border needed for fullscreen */
 }
 
 /* ── Layout ──────────────────────────────── */
 mainbox {
-  orientation: horizontal;
-  children: [ "borderbox" ];
-  spacing: 0px;
-  padding: 0px;
-}
-
-borderbox {
-  orientation: horizontal;
-  children: [ "imagebox", "contentbox" ];
-  padding: 0px;
-  spacing: 0px;
-  border-radius: 3px;
-}
-
-contentbox {
   orientation: vertical;
-  children: [ "entry", "listview" ];
-  spacing: 0px;
-  padding: 0px;
-  expand: true;
+  children: [ "inputbar", "listview" ];
+  padding: 25% 30%;     /* Centers the content (top/bottom, left/right) */
+  spacing: 20px;
 }
 
-/* ── Imagebox ────────────────────────────── */
-imagebox {
-  background-image: url("~/.config/hypr/wallpapers/japan.jpg");
-  background-repeat: false;
-  size: 300px 625px;
+/* ── Input Bar ───────────────────────────── */
+inputbar {
+  children: [ "prompt", "entry" ];
+  background-color: @bg-col;
+  border: 2px;
+  border-color: @border-col;
+  border-radius: 0px;   /* Pixel look */
+  padding: 2px;
 }
 
-/* ── Elements ────────────────────────────── */
-element {
-  border-radius: 0px;
-}
-
-element-text, element-icon {
-  padding: 6px 8px;
-  spacing: 2px;
-  text-color: #fab387;
-}
-
-element selected {
-  background-color: #191919;
-  text-color: #e5c07b;
-  border-radius: 3px;
-}
-
-/* ── Input & Prompt ──────────────────────── */
 prompt {
-  enabled: false;
-  background-color: transparent;
-  text-color: #61afef;
-  padding: 5px 10px;
+  background-color: @border-col;
+  padding: 6px;
+  text-color: @bg-col;
+  border-radius: 0px;
+  margin: 10px 0px 10px 10px;
 }
 
 entry {
-  padding: 8px;
-  expand: false;
-  font: "JetBrainsMono Nerd Font 12";
-  text-color: #fab387;
-  border-radius: 0px 3px 0px 0px;
-  background-color: #292e36;  // input field
+  padding: 15px;
+  text-color: @border-col;
+  background-color: @bg-col;
+  placeholder: "Search...";
+  placeholder-color: #555555;
 }
 
 /* ── Listview ────────────────────────────── */
 listview {
-  lines: 1;
-  background-color: rgba(46, 52, 64, 0.8); // solid background inside blur
-  border-radius: 0px 0px 3px 0px;
-  padding: 5px;
+  background-color: transparent;
+  columns: 1;
+  lines: 8;             /* How many items to show */
+  spacing: 5px;         /* Space between items */
+  cycle: true;
+  dynamic: true;
+  layout: vertical;
+}
+
+/* ── Elements ────────────────────────────── */
+element {
+  orientation: horizontal;
+  children: [ "element-text" ];
+  padding: 10px 15px;
+  spacing: 5px;
+  border-radius: 0px;
+  
+  /* Defaults for unselected items */
+  background-color: transparent;
+  text-color: @fg-col;
+}
+
+element-text {
+  /* THE FIX: Force transparency here */
+  background-color: transparent;
+  text-color: inherit;
+  vertical-align: 0.5;
+}
+
+/* ── States ──────────────────────────────── */
+element selected {
+  /* This sets the green bar on the container */
+  background-color: @selected-col; 
+  text-color: @fg-col2;
+  border: 0px;
+}
+
+element normal.active {
+  background-color: @bg-col;
+  text-color: @border-col;
 }

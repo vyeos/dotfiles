@@ -13,6 +13,7 @@ alias gor="go run ."
 alias shadcn="pnpm dlx shadcn@latest"
 alias ghconf="nvim ~/.config/ghostty/config"
 alias cdgd="cd /Users/rudra/Library/CloudStorage/GoogleDrive-rudranpatel0980@gmail.com/My\ Drive"
+alias btop="btop --force-utf"
 
 zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 

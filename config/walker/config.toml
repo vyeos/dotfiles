@@ -1,0 +1,47 @@
+# UI Settings
+[ui]
+fullscreen = true
+
+[ui.anchors]
+top = true
+left = true
+bottom = true
+right = true
+
+# List Settings
+[list]
+show_initial_entries = true
+max_entries = 50
+
+# Search Bar
+[search]
+placeholder = "Search Applications..."
+
+# Activation Keys (for selecting items quickly)
+[activation_mode]
+labels = "jkl;asdf"
+
+[builtins.applications]
+weight = 5
+show_generic = true # Shows "Web Browser" instead of just "Firefox" sometimes
+
+[builtins.runner]
+weight = 1
+icon = "utilities-terminal"
+name = "runner"
+
+[builtins.websearch]
+weight = 1
+icon = "globe"
+name = "google"
+prefix = "?"
+
+# --- YOUR CUSTOM COMMANDS ---
+
+[[custom_commands]]
+name = "Create Web App"
+description = "Turn a website into a desktop app (Omarchy Style)"
+cmd = "bash ~/.local/bin/create-webapp.sh"
+keywords = ["webapp", "create", "site", "pwa"]
+icon = "application-default-icon"
+weight = 10 # High weight keeps it visible

@@ -1,0 +1,21 @@
+{
+  "ui": {
+    "fullscreen": true,
+    "anchors": {
+      "top": true,
+      "left": true,
+      "bottom": true,
+      "right": true
+    }
+  },
+  "list": {
+    "show_initial_entries": true,
+    "max_entries": 50
+  },
+  "search": {
+    "placeholder": "Search..."
+  },
+  "activation_mode": {
+    "labels": "FJKLDSIE"
+  }
+}

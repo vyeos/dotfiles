@@ -9,7 +9,7 @@ makepkg -si --noconfirm
 cd ..
 rm -rf yay-bin
 
-sudo pacman -S --noconfirm hypridle  hyprlock dunst libnotify fastfetch ttf-firacode-nerd ttf-jetbrains-mono-nerd pamixer cliphist slurp grim ntfs-3g noto-fonts-emoji
+sudo pacman -S --noconfirm hypridle  hyprlock dunst libnotify fastfetch ttf-firacode-nerd ttf-jetbrains-mono-nerd pamixer cliphist slurp grim ntfs-3g noto-fonts-emoji wireplumber blueman bluez bluez-utils upower rtkit
 
 yay -S --noconfirm brave-bin dunst hyprpaper light swappy pulseaudio swaylock-effects-git hyprpicker-git github-cli ghostty-git
 

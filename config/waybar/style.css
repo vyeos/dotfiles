@@ -19,7 +19,7 @@ window#waybar {
   background: #1e1e2e;
   padding: 0 14px;
   margin: 4px 2px;
-  border-radius: 15px;
+  border-radius: 8px;
   border: 1px solid #313244;
   color: #cdd6f4;
 }
@@ -113,6 +113,10 @@ window#waybar {
 
 #workspaces button.empty {
   opacity: 0.5;
+}
+
+#workspaces button.urgent {
+  background-color: #e06c75; /* Red */
 }
 
 @keyframes blink {

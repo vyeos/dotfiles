@@ -5,40 +5,80 @@ selection_wrap = true
 hide_action_hints = true
 
 [placeholders]
-"default" = { input = " Search...", list = "No Results" }
+"default" = { input = " Search...", list = "No Results" }
 
 [keybinds]
 quick_activate = []
 
-[providers]
-max_results = 50
-# CRITICAL FIX: Added "commands" and "runner" to this list
-default = [
+# --- MODULES CONFIGURATION ---
+# Each module needs to be explicitly configured
+[modules.applications]
+# Desktop applications from .desktop files
+
+[modules.runner]
+# Command runner
+
+[modules.commands]
+# Custom commands
+
+[modules.websearch]
+# Web search functionality
+
+[modules.calc]
+# Calculator
+
+[modules.ssh]
+# SSH connections (optional)
+
+[modules.switcher]
+# Window switcher (optional)
+
+# --- LIST CONFIGURATION ---
+[list]
+max_entries = 50
+
+# --- SEARCH CONFIGURATION ---
+[search]
+# Defines which modules are active and in what order
+# This replaces the old "providers" section
+modules = [
+  "applications",
+  "runner", 
   "commands",
-  "desktopapplications",
-  "runner",
   "websearch",
 ]
 
-[[providers.prefixes]]
+# --- PREFIX-BASED ACTIVATION ---
+# Use prefixes to activate specific modules
+[[search.prefix]]
 prefix = "/"
-provider = "files" # Swapped to files (standard convention), change back to providerlist if you prefer
+module = "finder"  # File finder
 
-[[providers.prefixes]]
+[[search.prefix]]
 prefix = "?"
-provider = "websearch"
+module = "websearch"
 
-[[providers.prefixes]]
+[[search.prefix]]
 prefix = ":"
-provider = "commands"
+module = "commands"
 
-[[providers.prefixes]]
+[[search.prefix]]
 prefix = "="
-provider = "calc"
+module = "calc"
+
+[[search.prefix]]
+prefix = "@"
+module = "ssh"
 
 # --- CUSTOM COMMANDS ---
-# Changed from [[custom_commands]] to [[commands]]
-[[commands]]
+[[commands.commands]]
+name = "Create Desktop App"
+description = "Create a new desktop application entry"
+cmd = "kitty --hold bash ~/.local/bin/create-desktop-app.sh"
+keywords = ["create", "app", "desktop", "application", "new"]
+icon = "list-add"
+
+[[commands.commands]]
 name = "Create Web App"
 description = "Turn a website into a desktop app (Omarchy Style)"
 cmd = "bash ~/.local/bin/create-webapp.sh"

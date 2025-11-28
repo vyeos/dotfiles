@@ -1,6 +1,6 @@
 * {
   border: none;
-  font-family: "JetBrainsMono Nerd Font";
+  font-family: "jetbrainsmono nerd font";
   font-size: 13px;
   font-weight: bold;
 }
@@ -19,7 +19,7 @@ window#waybar {
   background: #1e1e2e;
   padding: 0 14px;
   margin: 4px 2px;
-  border-radius: 8px;
+  border-radius: 4px;
   border: 1px solid #313244;
   color: #cdd6f4;
 }
@@ -29,29 +29,29 @@ window#waybar {
 }
 
 #network {
-  color: #6272a4; /* Default: Blue/Grey (Scanning/Unknown) */
+  color: #6272a4; /* default: blue/grey (scanning/unknown) */
 }
 #network.wifi,
 #network.ethernet {
-  color: #98c379; /* Connected: Green */
+  color: #98c379; /* connected: green */
 }
 #network.disconnected {
-  color: #45475a; /* Disconnected: Dim Grey */
+  color: #45475a; /* disconnected: dim grey */
 }
 
 #bluetooth {
-  color: #98c379; /* Connected: Green */
+  color: #98c379; /* connected: green */
 }
 #bluetooth.disabled,
 #bluetooth.off {
-  color: #45475a; /* Off: Dim Grey */
+  color: #45475a; /* off: dim grey */
 }
 
 #pulseaudio {
-  color: #98c379; /* Active: Green */
+  color: #98c379; /* active: green */
 }
 #pulseaudio.muted {
-  color: #45475a; /* Muted: Dim Grey */
+  color: #45475a; /* muted: dim grey */
 }
 #pulseaudio.microphone {
   color: #98c379;
@@ -61,24 +61,24 @@ window#waybar {
 }
 
 #backlight {
-  color: #98c379; /* Always active */
+  color: #98c379; /* always active */
 }
 
 #battery {
-  color: #61afef; /* 20% - 80%: Blue */
+  color: #61afef; /* 20% - 80%: blue */
 }
 
 #battery.charging,
 #battery.plugged {
-  color: #98c379; /* Charging: Green */
+  color: #98c379; /* charging: green */
 }
 
 #battery.warning:not(.charging) {
-  color: #e5c07b; /* 10-20%: Yellow */
+  color: #e5c07b; /* 10-20%: yellow */
 }
 
 #battery.critical:not(.charging) {
-  color: #e06c75; /* < 10%: Red */
+  color: #e06c75; /* < 10%: red */
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -90,15 +90,15 @@ window#waybar {
   color: #98c379;
 }
 
-/* -- POWER BUTTON -- */
+/* -- power button -- */
 #custom-power {
   color: #f38ba8;
   padding-right: 18px;
 }
 
-/* 3. WORKSPACES */
+/* 3. workspaces */
 
-/* --- WORKSPACES (Omarchy Style) --- */
+/* --- workspaces (omarchy style) --- */
 
 #workspaces button {
   all: initial;
@@ -108,7 +108,7 @@ window#waybar {
 }
 
 #workspaces button.active {
-  color: #98c379; /* Connected: Green */
+  color: #98c379; /* connected: green */
 }
 
 #workspaces button.empty {
@@ -116,7 +116,7 @@ window#waybar {
 }
 
 #workspaces button.urgent {
-  background-color: #e06c75; /* Red */
+  background-color: #e06c75; /* red */
 }
 
 @keyframes blink {

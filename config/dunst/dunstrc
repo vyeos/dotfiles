@@ -13,6 +13,7 @@ transparency = 0
 icon_position = left
 alignment = center
 follow = mouse
+highlight = "#a3be8c"
 
 [urgency_low]
 # Very Dark Green

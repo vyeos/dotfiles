@@ -16,6 +16,8 @@ alias shadcn="pnpm dlx shadcn@latest"
 alias ghconf="nvim ~/.config/ghostty/config"
 alias cdgd="cd /Users/rudra/Library/CloudStorage/GoogleDrive-rudranpatel0980@gmail.com/My\ Drive"
 alias btop="btop --force-utf"
+alias open="thunar"
+alias zat="zathura"
 
 zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 
@@ -23,7 +25,7 @@ zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 # DISABLE_MAGIC_FUNCTIONS="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# ENABLE_CORRECTION="true"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 # You can also set it to another string to have that shown instead of the default red dots.

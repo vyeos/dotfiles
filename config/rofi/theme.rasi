@@ -18,90 +18,128 @@
 }
 
 /* ── Window ──────────────────────────────── */
+/* ── Global Settings ────────────────────────── */
+* {
+    font: "JetBrainsMono Nerd Font 14";
+
+    /* --- PALETTE --- */
+    /* Deep Void Green (Background) */
+    bg-col:         #050a08;
+    
+    /* Lighter Green (Input/Elements) */
+    bg-col-light:   #0f1c19;
+    
+    /* Sage/Neon Green (Accent) */
+    accent-col:     #a6e3a1;
+    
+    /* Text Colors */
+    fg-col:         #cdd6f4;
+    fg-col-muted:   #6c7086;
+    fg-col-selected:#050a08; /* Dark text on green background */
+
+    background-color: transparent;
+    text-color: @fg-col;
+    margin: 0px;
+    padding: 0px;
+    spacing: 0px;
+}
+
+/* ── Window ─────────────────────────────────── */
 window {
-  fullscreen: true;     /* FORCE FULL SCREEN */
-  width: 100%;
-  height: 100%;
-  location: center;
-  
-  background-color: rgba(10, 25, 20, 0.95); /* Dark Green with slight transparency */
-  border: 0px;          /* No border needed for fullscreen */
+    fullscreen: true;
+    transparency: "real";
+    
+    /* Dark overlay with slight transparency */
+    background-color: rgba(5, 10, 8, 0.96);
+    
+    /* Minimal border */
+    border: 0px;
+    border-color: @accent-col;
 }
 
-/* ── Layout ──────────────────────────────── */
+/* ── Main Layout ────────────────────────────── */
 mainbox {
-  orientation: vertical;
-  children: [ "inputbar", "listview" ];
-  padding: 25% 30%;     /* Centers the content (top/bottom, left/right) */
-  spacing: 20px;
+    orientation: vertical;
+    children: [ "inputbar", "listview" ];
+    
+    /* Centered narrow column for that "Terminal" feel */
+    padding: 25% 32%;
+    spacing: 20px;
 }
 
-/* ── Input Bar ───────────────────────────── */
+/* ── Input Bar ──────────────────────────────── */
 inputbar {
-  children: [ "prompt", "entry" ];
-  background-color: @bg-col;
-  border: 2px;
-  border-color: @border-col;
-  border-radius: 0px;   /* Pixel look */
-  padding: 2px;
+    children: [ "prompt", "entry" ];
+    background-color: transparent;
+    border: 2px;
+    border-color: @accent-col;
+    border-radius: 0px; /* Sharp corners */
+    margin: 0px 0px 10px 0px;
 }
 
 prompt {
-  background-color: @border-col;
-  padding: 6px;
-  text-color: @bg-col;
-  border-radius: 0px;
-  margin: 10px 0px 10px 10px;
+    background-color: @accent-col;
+    text-color: @bg-col;
+    padding: 12px 16px;
+    font: "JetBrainsMono Nerd Font Bold 14";
 }
 
 entry {
-  padding: 15px;
-  text-color: @border-col;
-  background-color: @bg-col;
-  placeholder: "Search...";
-  placeholder-color: #555555;
+    background-color: transparent;
+    text-color: @accent-col; /* Green text while typing */
+    padding: 12px;
+    placeholder: "Search...";
+    placeholder-color: @fg-col-muted;
 }
 
-/* ── Listview ────────────────────────────── */
+/* ── List ───────────────────────────────────── */
 listview {
-  background-color: transparent;
-  columns: 1;
-  lines: 8;             /* How many items to show */
-  spacing: 5px;         /* Space between items */
-  cycle: true;
-  dynamic: true;
-  layout: vertical;
+    columns: 1;
+    lines: 7;
+    spacing: 6px;
+    cycle: true;
+    dynamic: true;
+    scrollbar: false;
 }
 
-/* ── Elements ────────────────────────────── */
+/* ── Elements (Rows) ────────────────────────── */
 element {
-  orientation: horizontal;
-  children: [ "element-text" ];
-  padding: 10px 15px;
-  spacing: 5px;
-  border-radius: 0px;
-  
-  /* Defaults for unselected items */
-  background-color: transparent;
-  text-color: @fg-col;
+    orientation: horizontal;
+    /* ADDED ICON HERE: */
+    children: [ "element-icon", "element-text" ];
+    padding: 10px 14px;
+    spacing: 12px;
+    border: 0px;
+}
+
+/* Icon Settings */
+element-icon {
+    size: 24px;
+    vertical-align: 0.5;
 }
 
 element-text {
-  /* THE FIX: Force transparency here */
-  background-color: transparent;
-  text-color: inherit;
-  vertical-align: 0.5;
+    vertical-align: 0.5;
+    text-color: inherit;
 }
 
-/* ── States ──────────────────────────────── */
-element selected {
-  /* This sets the green bar on the container */
-  background-color: @selected-col; 
-  text-color: @fg-col2;
-  border: 0px;
+/* ── States ─────────────────────────────────── */
+
+/* Normal Item */
+element normal.normal {
+    background-color: transparent;
+    text-color: @fg-col;
 }
 
-element normal.active {
-  background-color: @bg-col;
-  text-color: @border-col;
+/* Selected Item */
+element selected.normal {
+    background-color: @accent-col;
+    text-color: @fg-col-selected;
+    border: 0px;
+}
+
+/* Alternate Rows (Optional - currently transparent) */
+element alternate.normal {
+    background-color: transparent;
+    text-color: @fg-col;
 }

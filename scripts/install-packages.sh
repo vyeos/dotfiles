@@ -10,7 +10,7 @@ makepkg -si --noconfirm
 cd ..
 rm -rf yay-bin
 
-yay -S --noconfirm hyprpaper light hyprpicker-git github-cli
+yay -Syu --noconfirm hyprpaper light hyprpicker-git github-cli brave-bin
 
 sudo pacman -Syu --noconfirm
 yay -Syu --noconfirm

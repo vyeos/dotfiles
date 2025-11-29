@@ -22,3 +22,18 @@ sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUS
 
 rm -rf /home/vyeos/.zshrc
 ln -s /home/vyeos/dotfiles/config/.zshrc /home/vyeos/
+
+sudo ln -s ~/dotfiles/scripts/system/create-webapp.sh /usr/local/bin/create-webapp
+
+sudo ln -s ~/dotfiles/scripts/system/delete-webapp.sh /usr/local/bin/delete-webapp
+
+cat <<EOF > ~/.local/share/applications/delete-webapp.desktop
+[Desktop Entry]
+Name=Delete Webapp
+Comment=Remove an existing web app
+Exec=/usr/local/bin/delete-webapp
+Icon=user-trash
+Terminal=false
+Type=Application
+Categories=Utility;Settings;
+EOF

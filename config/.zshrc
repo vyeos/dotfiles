@@ -18,6 +18,7 @@ alias cdgd="cd /Users/rudra/Library/CloudStorage/GoogleDrive-rudranpatel0980@gma
 alias btop="btop --force-utf"
 alias open="thunar"
 alias zat="zathura"
+alias img="kitten icat"
 
 zstyle ':omz:update' mode reminder  # just remind me to update when it's time
 

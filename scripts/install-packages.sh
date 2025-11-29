@@ -11,7 +11,7 @@ sudo pacman -Syu --noconfirm hyprland kitty waybar \
     upower rtkit ripgrep rust go zig cargo gum \
     pavucontrol thunar gvfs thunar-volman nwg-look \
     qt5-wayland qt6-wayland brightnessctl \
-    nodejs npm
+    nodejs npm imagemagick
 
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin

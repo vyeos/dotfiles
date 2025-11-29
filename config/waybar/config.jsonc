@@ -59,7 +59,7 @@
   "custom/power": {
     "format": "⏻",
     "tooltip": false,
-    "on-click": "hyprlock"
+    "on-click": "/home/vyeos/dotfiles/scripts/system/powermenu.sh"
   },
 
 "battery": {

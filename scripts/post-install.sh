@@ -1,33 +1,50 @@
 #! /usr/bin/bash
 
+DOTFILES="$HOME/dotfiles/config"
+
 cd ~
-rm -rf /home/vyeos/.config/hypr
-rm -rf /home/vyeos/.config/kitty
-ln -s /home/vyeos/dotfiles/config/hypr /home/vyeos/.config
-ln -s /home/vyeos/dotfiles/config/nvim /home/vyeos/.config
-ln -s /home/vyeos/dotfiles/config/rofi /home/vyeos/.config
-ln -s /home/vyeos/dotfiles/config/waybar /home/vyeos/.config
-ln -s /home/vyeos/dotfiles/config/dunst /home/vyeos/.config
-ln -s /home/vyeos/dotfiles/config/kitty /home/vyeos/.config
-ln -s /home/vyeos/dotfiles/config/git /home/vyeos/.config
-ln -s /home/vyeos/dotfiles/config/swappy /home/vyeos/.config
-ln -s /home/vyeos/dotfiles/config/Thunar /home/vyeos/.config
-ln -s /home/vyeos/dotfiles/config/btop /home/vyeos/.config
 
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+echo "Linking configurations..."
 
-# sudo git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-sudo git clone https://github.com/zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/zsh-autosuggestions 
-sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZSH_CUSTOM/plugins/zsh-syntax-highlighting
+configs=(hypr kitty nvim rofi waybar dunst git swappy btop)
 
-rm -rf /home/vyeos/.zshrc
-ln -s /home/vyeos/dotfiles/config/.zshrc /home/vyeos/
+for config in "${configs[@]}"; do
+    rm -rf "$HOME/.config/$config"
+    ln -s "$DOTFILES/$config" "$HOME/.config/$config"
+    echo "Linked $config"
+done
 
-sudo ln -s ~/dotfiles/scripts/system/create-webapp.sh /usr/local/bin/create-webapp
+echo "Installing Oh My Zsh..."
 
-sudo ln -s ~/dotfiles/scripts/system/delete-webapp.sh /usr/local/bin/delete-webapp
+if [ ! -d "$HOME/.oh-my-zsh" ]; then
+    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
+fi
 
-cat <<EOF > ~/.local/share/applications/delete-webapp.desktop
+ZSH_CUSTOM="$HOME/.oh-my-zsh/custom"
+
+echo "Installing Zsh Plugins..."
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
+    git clone https://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
+fi
+
+if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
+    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
+fi
+
+rm -rf "$HOME/.zshrc"
+ln -s "$HOME/dotfiles/config/.zshrc" "$HOME/.zshrc"
+
+echo "Setting up custom scripts..."
+
+chmod +x "$HOME/dotfiles/scripts/system/create-webapp.sh"
+chmod +x "$HOME/dotfiles/scripts/system/delete-webapp.sh"
+
+sudo ln -sf "$HOME/dotfiles/scripts/system/create-webapp.sh" /usr/local/bin/create-webapp
+sudo ln -sf "$HOME/dotfiles/scripts/system/delete-webapp.sh" /usr/local/bin/delete-webapp
+
+mkdir -p "$HOME/.local/share/applications"
+
+cat <<EOF > "$HOME/.local/share/applications/delete-webapp.desktop"
 [Desktop Entry]
 Name=Delete Webapp
 Comment=Remove an existing web app
@@ -37,3 +54,5 @@ Terminal=false
 Type=Application
 Categories=Utility;Settings;
 EOF
+
+echo "Setup Complete! Please restart your shell or log out."

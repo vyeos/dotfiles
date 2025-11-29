@@ -1,20 +1,18 @@
-sudo pacman -S --needed base-devel git meson ninja wayland-protocols libxkbcommon pango cairo glib2 bison flex check startup-notification gdk-pixbuf2 libxcb xcb-util xcb-util-wm xcb-util-cursor
+echo "Installing Rofi Wayland dependencies and building..."
 
-sudo pacman -Rns rofi
+sudo pacman -S --needed --noconfirm base-devel git meson ninja wayland-protocols libxkbcommon pango cairo glib2 bison flex check startup-notification gdk-pixbuf2 libxcb xcb-util xcb-util-wm xcb-util-cursor
 
-# 1. Clone the repository
+sudo pacman -Rns rofi --noconfirm 2>/dev/null || true
+
+if [ -d "rofi-wayland-source" ]; then
+    rm -rf rofi-wayland-source
+fi
+
 git clone https://github.com/lbonn/rofi.git rofi-wayland-source
-
-# 2. Enter the directory
 cd rofi-wayland-source
-
-# 3. Setup the build
 meson setup build
-
-# 4. Compile
 ninja -C build
-
-# 5. Install to your system
 sudo ninja -C build install
 
-rofi -v
+cd ~
+echo "Rofi Wayland installed successfully."

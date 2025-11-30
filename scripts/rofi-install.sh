@@ -4,6 +4,8 @@ sudo pacman -S --needed --noconfirm base-devel git meson ninja wayland-protocols
 
 sudo pacman -Rns rofi --noconfirm 2>/dev/null || true
 
+cd ~/personal
+
 if [ -d "rofi-wayland-source" ]; then
     rm -rf rofi-wayland-source
 fi

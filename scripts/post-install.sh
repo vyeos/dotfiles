@@ -55,4 +55,9 @@ Type=Application
 Categories=Utility;Settings;
 EOF
 
+echo "Setting fzf..."
+source <(fzf --zsh)
+
 echo "Setup Complete! Please restart your shell or log out."
+
+

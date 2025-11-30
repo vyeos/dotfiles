@@ -80,6 +80,8 @@ source $ZSH/oh-my-zsh.sh
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
+
 # bun completions
 [ -s "/Users/rudra/.bun/_bun" ] && source "/Users/rudra/.bun/_bun"
 
@@ -95,3 +97,5 @@ case ":$PATH:" in
 esac
 
 export PATH="$HOME/.cargo/bin:$PATH"
+
+

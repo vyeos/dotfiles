@@ -14,6 +14,7 @@ sudo pacman -Syu --noconfirm hyprland kitty waybar \
     nodejs npm imagemagick fzf \
     cups system-config-printer gutenprint \
     spotify-player wf-recorder slurp \
+    libreoffice-fresh \
 
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin

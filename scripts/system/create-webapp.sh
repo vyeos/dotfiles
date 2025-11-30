@@ -34,4 +34,4 @@ Categories=Network;WebBrowser;
 EOF
 
 # 5. Notify
-notify-send "Webapp Created" "$APP_NAME created! Look for it in Rofi."
+notify-send "Webapp Created" "$APP_NAME created!"

@@ -3,8 +3,8 @@
 APP_DIR="$HOME/.local/share/applications"
 
 # 1. Get a list of webapps
-# We assume files are named 'webapp-[name].desktop'
-# We strip 'webapp-' and '.desktop' to show a clean list to the user
+# Assume files are named 'webapp-[name].desktop'
+# Strip 'webapp-' and '.desktop' to show a clean list to the user
 cd "$APP_DIR" || exit
 APPS=$(ls webapp-*.desktop 2>/dev/null | sed -e 's/^webapp-//' -e 's/\.desktop$//')
 

@@ -18,10 +18,11 @@
     "hyprland/workspaces"
   ],
   "modules-right": [
+    "custom/recording",
     "pulseaudio",
     "backlight",
     "battery",
-    "custom/power"
+    "custom/power",
   ],
 
   // --- MODULES ---
@@ -62,46 +63,54 @@
     "on-click": "/home/vyeos/dotfiles/scripts/system/powermenu.sh"
   },
 
-"battery": {
-        "interval": 5,
-        "states": {
-            "warning": 20,
-            "critical": 10
-        },
-        "format": "{capacity}% {icon}",
-        "format-discharging": "{capacity}% {icon}",
-        "format-charging": "{capacity}% 󰂄",
-        "format-plugged": "{capacity}% ",
-        "format-full": "Full 󰂅",
-        "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-        "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
-        "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
-        // "on-click": "omarchy-menu power"
-    },
+  "custom/recording": {
+    "format": "🟢 REC",
+    "interval": 1,
+    "exec": "echo '🟢 REC'",
+    "exec-if": "pgrep wf-recorder",
+    "tooltip": false
+  },
 
-"network": {
-      "format-wifi": "{icon} {essid}",
-      "format-ethernet": "󰈀 Wired",
-      "format-disconnected": "󰤮 Disconnected",
-      "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-      "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-      "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-      "tooltip-format-disconnected": "Disconnected",
-      "interval": 3,
-      "max-length": 15,
-      "on-click": "kitty --class sys_wifi -e impala"
+  "battery": {
+    "interval": 5,
+    "states": {
+      "warning": 20,
+      "critical": 10
     },
+    "format": "{capacity}% {icon}",
+    "format-discharging": "{capacity}% {icon}",
+    "format-charging": "{capacity}% 󰂄",
+    "format-plugged": "{capacity}% ",
+    "format-full": "Full 󰂅",
+    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
+    "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
+    "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
+    // "on-click": "omarchy-menu power"
+  },
 
-    "bluetooth": {
-      "format": " {status}",
-      "format-disabled": "󰂲 Off",
-      "format-connected": " {device_alias}",
-      "format-connected-battery": " {device_alias} {device_battery_percentage}%",
-      "on-click": "kitty --class sys_bt -e bluetui",
-      "max-length": 15
-    },
+  "network": {
+    "format-wifi": "{icon} {essid}",
+    "format-ethernet": "󰈀 Wired",
+    "format-disconnected": "󰤮 Disconnected",
+    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
+    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Disconnected",
+    "interval": 3,
+    "max-length": 15,
+    "on-click": "kitty --class sys_wifi -e impala"
+  },
 
-"pulseaudio#microphone": {
+  "bluetooth": {
+    "format": " {status}",
+    "format-disabled": "󰂲 Off",
+    "format-connected": " {device_alias}",
+    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "on-click": "kitty --class sys_bt -e bluetui",
+    "max-length": 15
+  },
+
+  "pulseaudio#microphone": {
     "format": "{format_source}",
     "format-source": " {volume}%",
     "format-source-muted": " Muted",
@@ -116,7 +125,7 @@
     "format-icons": ["", "", "", "", "", "", "", "", ""]
   },
 
-"pulseaudio": {
+  "pulseaudio": {
     "format": "{icon} {volume}%",
     "format-muted": "󰖁 Muted",
     "format-icons": {

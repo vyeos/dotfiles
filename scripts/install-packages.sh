@@ -11,7 +11,9 @@ sudo pacman -Syu --noconfirm hyprland kitty waybar \
     upower rtkit ripgrep rust go zig cargo gum \
     pavucontrol thunar gvfs thunar-volman nwg-look \
     qt5-wayland qt6-wayland brightnessctl \
-    nodejs npm imagemagick fzf
+    nodejs npm imagemagick fzf \
+    cups system-config-printer gutenprint \
+    spotify-player wf-recorder slurp \
 
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
@@ -19,7 +21,7 @@ makepkg -si --noconfirm
 cd ..
 rm -rf yay-bin
 
-yay -Syu --noconfirm hyprpaper hyprpicker-git github-cli brave-bin hyprpolkitagent
+yay -Syu --noconfirm hyprpaper hyprpicker-git github-cli brave-bin hyprpolkitagent localsend-bin
 
 sudo pacman -Syu --noconfirm
 yay -Syu --noconfirm

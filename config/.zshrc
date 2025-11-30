@@ -81,7 +81,6 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 source <(fzf --zsh)
-export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 
 # bun completions
 [ -s "/Users/rudra/.bun/_bun" ] && source "/Users/rudra/.bun/_bun"

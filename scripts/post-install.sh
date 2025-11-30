@@ -58,6 +58,9 @@ EOF
 echo "Setting fzf..."
 source <(fzf --zsh)
 
+echo "Setting up printer..."
+sudo systemctl enable --now cups
+
 echo "Setup Complete! Please restart your shell or log out."
 
 

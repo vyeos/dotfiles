@@ -1,3 +1,5 @@
+/* SEVASTOPOL THEME - INDUSTRIAL STYLE */
+
 * {
   border: none;
   font-family: "JetBrainsMono Nerd Font";
@@ -9,53 +11,124 @@
 window#waybar {
   background-color: #0d0d0d;
   color: #e0e0e0;
-  border-bottom: 2px solid #ffb86c; /* Amber line at bottom */
+  border-bottom: 2px solid #ffb86c;
+  border-top: 2px solid #444444;
 }
 
-/* Modules look like distinct blocks */
+/* --- MODULES --- */
+/* Groups all modules to have the same separator logic */
+#custom-header,
 #workspaces,
+#custom-separator,
 #clock,
 #battery,
-#cpu,
-#memory,
-#disk,
 #network,
+#bluetooth,
 #pulseaudio,
-#tray {
+#pulseaudio.microphone,
+#backlight,
+#custom-kbd_backlight,
+#custom-power,
+#custom-recording {
   background-color: #0d0d0d;
-  padding: 0px 15px;
-  margin: 5px 0px;
-  border-right: 1px solid #444444; /* Separator lines */
+  padding: 0px 12px;
+  margin: 4px 0px;
+  /* The vertical separator line */
+  border-right: 1px solid #444444;
 }
 
+/* Remove border from the last item so it looks clean */
+#custom-power {
+  border-right: none;
+}
+
+/* --- WORKSPACES --- */
 #workspaces button {
   padding: 0 5px;
-  color: #444444;
+  color: #444444; /* Dim by default */
+  border-radius: 0;
 }
 
 #workspaces button.active {
-  color: #ffb86c;
+  color: #ffb86c; /* Amber when active */
+  background-color: #1a1a1a;
+  border-top: 2px solid #ffb86c; /* Highlight indicator on top */
   border-bottom: 2px solid #ffb86c;
 }
 
 #workspaces button.urgent {
   color: #ff5555;
-  background-color: #0d0d0d;
   border: 1px solid #ff5555;
+  animation-name: blink;
+  animation-duration: 0.5s;
+  animation-iteration-count: infinite;
 }
 
-/* Alert states */
-#battery.critical,
-#network.disconnected {
-  color: #ff5555;
+/* --- SPECIFIC COLORS --- */
+
+#custom-header {
+  color: #ffb86c;
+  font-weight: 900;
+}
+
+#clock {
+  color: #e0e0e0;
+  background-color: #151515; /* Slightly lighter bg for clock */
+}
+
+/* Audio & Mic */
+#pulseaudio,
+#pulseaudio.microphone {
+  color: #8be9fd; /* Cyan tint for audio systems */
+}
+#pulseaudio.muted,
+#pulseaudio.microphone.muted {
+  color: #444444;
+  text-decoration: line-through;
+}
+
+/* Battery Logic */
+#battery {
+  color: #50fa7b; /* Green for good power */
+}
+#battery.charging {
+  color: #ffb86c; /* Amber for charging */
+}
+#battery.warning {
+  color: #ffb86c;
+}
+#battery.critical {
+  color: #0d0d0d;
+  background-color: #ff5555; /* Solid Red block for critical */
   animation-name: blink;
   animation-duration: 1s;
   animation-iteration-count: infinite;
 }
 
+/* Network Logic */
+#network {
+  color: #ffb86c;
+}
+#network.disconnected {
+  color: #ff5555;
+}
+
+/* Recording State */
+#custom-recording {
+  color: #ff5555;
+  background-color: #2a0000;
+}
+
+/* Power Button */
+#custom-power {
+  color: #ff5555;
+  padding-right: 15px;
+}
+
+/* --- ANIMATIONS --- */
 @keyframes blink {
   to {
-    color: #0d0d0d;
     background-color: #ff5555;
+    color: #0d0d0d;
   }
 }

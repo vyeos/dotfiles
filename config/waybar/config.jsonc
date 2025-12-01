@@ -1,73 +1,69 @@
 {
   "layer": "top",
   "position": "top",
-  "height": 30,
-  "spacing": 4,
-  "margin-top": 5,
-  "margin-left": 10,
-  "margin-right": 10,
+  "height": 32,
+  "spacing": 0, // No spacing, continuous bar
+  "margin-top": 0,
+  "margin-left": 0,
+  "margin-right": 0,
 
   // --- LAYOUT ---
   "modules-left": [
-    "clock",
+    "custom/header",
+    "hyprland/workspaces",
+    "custom/separator",
     "network",
-    "bluetooth",
-    "pulseaudio#microphone"
+    "bluetooth"
   ],
   "modules-center": [
-    "hyprland/workspaces"
+    "clock"
   ],
   "modules-right": [
     "custom/recording",
+    "pulseaudio#microphone",
     "pulseaudio",
     "backlight",
-    "battery",
     "custom/kbd_backlight",
-    "custom/power",
+    "battery",
+    "custom/power"
   ],
 
   // --- MODULES ---
+
+  "custom/header": {
+    "format": " // SEVASTOPOL",
+    "tooltip": false
+  },
+
+  "custom/separator": {
+    "format": "|",
+    "tooltip": false
+  },
+
   "hyprland/workspaces": {
     "on-click": "activate",
-    "format": "{icon}",
-    "format-icons": {
-      "default": "",
-      "1": "1",
-      "2": "2",
-      "3": "3",
-      "4": "4",
-      "5": "5",
-      "6": "6",
-      "7": "7",
-      "8": "8",
-      "9": "9",
-      "10": "0",
-      "active": "󱓻"
-    },
+    "format": "[{name}]",
     "persistent-workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": []
+      "1": [], "2": [], "3": [], "4": []
     }
   },
 
   "clock": {
-    "format": " {:%H:%M   %a, %d %b}",
-    "tooltip-format": "<tt><small>{calendar}</small></tt>"
+    "interval": 1,
+    "format": "T-TIME: {:%H:%M:%S}", // Seconds are crucial for sci-fi
+    "tooltip-format": "{:%Y-%m-%d}"
   },
 
   "custom/power": {
-    "format": "⏻",
+    "format": " [SYSTEM_HALT] ",
     "tooltip": false,
     "on-click": "/home/vyeos/dotfiles/scripts/system/powermenu.sh"
   },
 
   "custom/recording": {
-    "format": "🟢 REC",
+    "format": "REC: ON",
     "interval": 1,
-    "exec": "echo '🟢 REC'",
+    "exec": "echo 'REC: ON'",
     "exec-if": "pgrep wf-recorder",
     "tooltip": false
   },
@@ -78,86 +74,51 @@
       "warning": 20,
       "critical": 10
     },
-    "format": "{capacity}% {icon}",
-    "format-discharging": "{capacity}% {icon}",
-    "format-charging": "{capacity}% 󰂄",
-    "format-plugged": "{capacity}% ",
-    "format-full": "Full 󰂅",
-    "format-icons": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"],
-    "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
-    "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
-    // "on-click": "omarchy-menu power"
+    "format": "PWR: {capacity}%",
+    "format-discharging": "PWR: {capacity}%",
+    "format-charging": "PWR: {capacity}% [CHG]",
+    "format-plugged": "PWR: {capacity}% [EXT]",
+    "format-full": "PWR: MAX",
+    "tooltip-format": "Draw: {power}W"
   },
 
   "custom/kbd_backlight": {
     "exec": "brightnessctl -d kbd_backlight i | grep -oP '\\d+%'",
     "interval": 5,
-    "format": "{icon} {text}",
-    "format-icons": ["󰌶", "󰌵"], 
-    "on-click": "~/dotfiles/scripts/system/kbd-backlight.sh",
-    "on-scroll-up": "brightnessctl -d kbd_backlight s +5%",
-    "on-scroll-down": "brightnessctl -d kbd_backlight s 5%-",
-    "tooltip": false
+    "format": "KBD: {}"
   },
 
   "network": {
-    "format-wifi": "{icon} {essid}",
-    "format-ethernet": "󰈀 Wired",
-    "format-disconnected": "󰤮 Disconnected",
-    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-disconnected": "Disconnected",
-    "interval": 3,
-    "max-length": 15,
+    "format-wifi": "NET: {essid}",
+    "format-ethernet": "NET: WIRED",
+    "format-disconnected": "NET: OFFLINE",
+    "tooltip-format": "Signal: {signalStrength}%",
+    "max-length": 20,
     "on-click": "kitty --class sys_wifi -e impala"
   },
 
   "bluetooth": {
-    "format": " {status}",
-    "format-disabled": "󰂲 Off",
-    "format-connected": " {device_alias}",
-    "format-connected-battery": " {device_alias} {device_battery_percentage}%",
+    "format": "COM: ON",
+    "format-disabled": "COM: OFF",
+    "format-connected": "COM: {device_alias}",
     "on-click": "kitty --class sys_bt -e bluetui",
     "max-length": 15
   },
 
   "backlight": {
-    "format": "{icon} {percent}%",
-    "format-icons": ["", "", "", "", "", "", "", "", ""]
+    "format": "LUM: {percent}%"
   },
 
-"pulseaudio#microphone": {
-    "format": "{format_source}",
-    "format-source": " {volume}%",
-    "format-source-muted": "  Muted",
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle",
-    "on-click-right": "pavucontrol -t 4", // Opens directly to Input Devices tab
-    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%+",
-    "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SOURCE@ 5%-",
-    "tooltip-format": "{desc}", // Shows the device name on hover
-    "scroll-step": 5
+  "pulseaudio#microphone": {
+    "format": "MIC: {volume}%",
+    "format-muted": "MIC: MUTE",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
   },
 
   "pulseaudio": {
-    "format": "{icon} {volume}%",
-    "format-muted": "󰖁 Muted",
-    "format-bluetooth": "{icon} {volume}%",
-    "format-bluetooth-muted": "󰖁 Muted",
-    "format-icons": {
-      "headphone": "",
-      "hands-free": "",
-      "headset": "",
-      "phone": "",
-      "portable": "",
-      "car": "",
-      "default": ["", "", ""]
-    },
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle",
-    "on-click-right": "pavucontrol -t 3", // Opens directly to Output Devices tab
-    "on-scroll-up": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%+",
-    "on-scroll-down": "wpctl set-volume -l 1.0 @DEFAULT_AUDIO_SINK@ 5%-",
-    "tooltip-format": "{desc}",
-    "scroll-step": 5
+    "format": "AUD: {volume}%",
+    "format-muted": "AUD: MUTE",
+    "format-bluetooth": "AUD: {volume}% [BT]",
+    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
   },
 }

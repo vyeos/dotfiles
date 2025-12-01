@@ -63,4 +63,8 @@ sudo systemctl enable --now cups
 
 echo "Setup Complete! Please restart your shell or log out."
 
+echo "HandleLidSwitch=suspend"
+
+nvim /etc/systemd/logind.conf
+
 

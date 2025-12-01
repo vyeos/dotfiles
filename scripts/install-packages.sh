@@ -4,7 +4,7 @@ cd ~
 sudo pacman -Syu --noconfirm hyprland kitty waybar \
     neovim git curl btop base-devel \
     cliphist wl-clipboard swappy hypridle hyprlock \
-    dunst fastfetch ttf-jetbrains-mono-nerd noto-fonts-emoji \
+    yad dunst fastfetch ttf-jetbrains-mono-nerd noto-fonts-emoji \
     pamixer slurp grim ntfs-3g wireplumber \
     bluez bluez-utils bluetui \
     impala iwd \

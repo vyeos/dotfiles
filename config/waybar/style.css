@@ -15,7 +15,8 @@ window#waybar {
 #bluetooth,
 #pulseaudio,
 #battery,
-#backlight {
+#backlight,
+#custom-kbd_backlight {
   background: #1e1e2e;
   padding: 0 14px;
   margin: 4px 2px;
@@ -87,6 +88,10 @@ window#waybar {
 }
 
 #battery.full {
+  color: #98c379;
+}
+
+#custom-kbd_backlight {
   color: #98c379;
 }
 

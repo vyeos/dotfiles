@@ -22,6 +22,7 @@
     "pulseaudio",
     "backlight",
     "battery",
+    "custom/kbd_backlight",
     "custom/power",
   ],
 
@@ -86,6 +87,17 @@
     "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
     "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
     // "on-click": "omarchy-menu power"
+  },
+
+  "custom/kbd_backlight": {
+    "exec": "brightnessctl -d kbd_backlight i | grep -oP '\\d+%'",
+    "interval": 5,
+    "format": "{icon} {text}",
+    "format-icons": ["󰌶", "󰌵"], 
+    "on-click": "~/dotfiles/scripts/system/kbd-backlight.sh",
+    "on-scroll-up": "brightnessctl -d kbd_backlight s +5%",
+    "on-scroll-down": "brightnessctl -d kbd_backlight s 5%-",
+    "tooltip": false
   },
 
   "network": {

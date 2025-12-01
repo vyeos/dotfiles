@@ -6,7 +6,7 @@ cd ~
 
 echo "Linking configurations..."
 
-configs=(hypr kitty nvim rofi waybar dunst git swappy btop)
+configs=(hypr kitty nvim rofi waybar dunst git swappy btop satty)
 
 for config in "${configs[@]}"; do
     rm -rf "$HOME/.config/$config"
@@ -60,6 +60,11 @@ source <(fzf --zsh)
 
 echo "Setting up printer..."
 sudo systemctl enable --now cups
+
+echo "Setting Losslesscut..."
+sudo mkdir -p /usr/share/losslesscut/resources/
+sudo ln -sf /usr/bin/ffmpeg /usr/share/losslesscut/resources/ffmpeg
+sudo ln -sf /usr/bin/ffprobe /usr/share/losslesscut/resources/ffprobe
 
 echo "Setup Complete! Please restart your shell or log out."
 

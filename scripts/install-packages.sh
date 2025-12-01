@@ -15,7 +15,8 @@ sudo pacman -Syu --noconfirm hyprland kitty waybar \
     cups system-config-printer gutenprint \
     spotify-player wf-recorder \
     libreoffice-fresh \
-    xdg-desktop-portal-hyprland pipewire
+    xdg-desktop-portal-hyprland pipewire \
+    ffmpeg
 
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin
@@ -23,7 +24,7 @@ makepkg -si --noconfirm
 cd ..
 rm -rf yay-bin
 
-yay -Syu --noconfirm hyprpaper hyprpicker-git github-cli brave-bin hyprpolkitagent localsend-bin
+yay -Syu --noconfirm hyprpaper hyprpicker-git github-cli brave-bin hyprpolkitagent localsend-bin losslesscut-bin
 
 sudo pacman -Syu --noconfirm
 yay -Syu --noconfirm

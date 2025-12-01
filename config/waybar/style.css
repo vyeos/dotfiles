@@ -45,17 +45,53 @@ window#waybar {
   color: #45475a; /* off: dim grey */
 }
 
+#pulseaudio,
+#pulseaudio-microphone {
+  padding: 0 10px;
+  background-color: transparent;
+  font-weight: bold;
+  transition: color 0.3s ease;
+}
+
+/* --- OUTPUT (SPEAKERS) --- */
 #pulseaudio {
   color: #98c379; /* active: green */
 }
+
 #pulseaudio.muted {
   color: #45475a; /* muted: dim grey */
+  padding-right: 14px; /* Optical balance for the muted icon */
 }
-#pulseaudio.microphone {
-  color: #98c379;
+
+#pulseaudio.bluetooth {
+  color: #61afef;
 }
-#pulseaudio.microphone.muted {
-  color: #45475a;
+
+/* Note: The ID is hyphenated because of 'pulseaudio#microphone' */
+#pulseaudio-microphone {
+  color: #e06c75; /* active: red (standard for recording) */
+}
+
+#pulseaudio-microphone.muted {
+  color: #45475a; /* muted: dim grey */
+}
+
+@keyframes recording-pulse {
+  0% {
+    color: #e06c75;
+  }
+  50% {
+    color: #be5046;
+  }
+  100% {
+    color: #e06c75;
+  }
+}
+
+#pulseaudio-microphone:not(.muted) {
+  animation-name: recording-pulse;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
 }
 
 #backlight {

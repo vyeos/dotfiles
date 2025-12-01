@@ -43,19 +43,35 @@ window#waybar {
 }
 
 /* --- WORKSPACES --- */
+
+/* 1. OCCUPIED STATE (Windows present, but not active) */
+/* "Systems Online" - Visible Tungsten White */
 #workspaces button {
   padding: 0 5px;
-  color: #444444; /* Dim by default */
+  color: #e0e0e0; /* Brighter white so you know data is there */
   border-radius: 0;
+  transition: color 0.2s ease;
 }
 
+/* 2. EMPTY STATE (Persistent workspace, no windows) */
+/* "Standby" - Dim Grey */
+#workspaces button.empty {
+  color: #444444;
+}
+
+/* 3. ACTIVE STATE (Currently focused) */
+/* "Focus" - Amber with borders */
 #workspaces button.active {
-  color: #ffb86c; /* Amber when active */
+  color: #ffb86c;
   background-color: #1a1a1a;
-  border-top: 2px solid #ffb86c; /* Highlight indicator on top */
+  border-top: 2px solid #ffb86c;
   border-bottom: 2px solid #ffb86c;
+  /* Optional: Override the 'empty' dimness if you focus an empty workspace */
+  opacity: 1;
 }
 
+/* 4. URGENT STATE (Notification) */
+/* "Alert" - Red Blink */
 #workspaces button.urgent {
   color: #ff5555;
   border: 1px solid #ff5555;

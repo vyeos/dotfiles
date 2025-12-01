@@ -31,94 +31,96 @@
   // --- MODULES ---
 
   "custom/header": {
-    "format": " // SEVASTOPOL",
-    "tooltip": false
-  },
+  "format": " // SEVASTOPOL",
+  "tooltip": false
+},
 
-  "custom/separator": {
-    "format": "|",
-    "tooltip": false
-  },
+"custom/separator": {
+  "format": "|",
+  "tooltip": false
+},
 
-  "hyprland/workspaces": {
-    "on-click": "activate",
-    "format": "[{name}]",
-    "persistent-workspaces": {
-      "1": [], "2": [], "3": [], "4": []
-    }
-  },
+"hyprland/workspaces": {
+  "on-click": "activate",
+  "format": "[{name}]",
+  "persistent-workspaces": {
+    "1": [], "2": [], "3": [], "4": []
+  }
+},
 
-  "clock": {
-    "interval": 1,
-    "format": "T-TIME: {:%H:%M:%S}", // Seconds are crucial for sci-fi
-    "tooltip-format": "{:%Y-%m-%d}"
-  },
+"clock": {
+  "interval": 1,
+  "format": "T-TIME: {:%H:%M:%S}", // Seconds are crucial for sci-fi
+  "tooltip-format": "{:%Y-%m-%d}"
+},
 
-  "custom/power": {
-    "format": " [SYSTEM_HALT] ",
-    "tooltip": false,
-    "on-click": "/home/vyeos/dotfiles/scripts/system/powermenu.sh"
-  },
+"custom/power": {
+  "format": " [SYSTEM_HALT] ",
+  "tooltip": false,
+  "on-click": "/home/vyeos/dotfiles/scripts/system/powermenu.sh"
+},
 
-  "custom/recording": {
-    "format": "REC: ON",
-    "interval": 1,
-    "exec": "echo 'REC: ON'",
-    "exec-if": "pgrep wf-recorder",
-    "tooltip": false
-  },
+"custom/recording": {
+  "format": "REC: ON",
+  "interval": 1,
+  "exec": "echo 'REC: ON'",
+  "exec-if": "pgrep wf-recorder",
+  "tooltip": false
+},
 
-  "battery": {
-    "interval": 5,
-    "states": {
-      "warning": 20,
-      "critical": 10
-    },
-    "format": "PWR: {capacity}%",
-    "format-discharging": "PWR: {capacity}%",
-    "format-charging": "PWR: {capacity}% [CHG]",
-    "format-plugged": "PWR: {capacity}% [EXT]",
-    "format-full": "PWR: MAX",
-    "tooltip-format": "Draw: {power}W"
+"battery": {
+  "interval": 5,
+  "states": {
+    "warning": 20,
+    "critical": 10
   },
+  "format": "PWR: {capacity}%",
+  "format-discharging": "PWR: {capacity}%",
+  "format-charging": "PWR: {capacity}% [CHG]",
+  "format-plugged": "PWR: {capacity}% [EXT]",
+  "format-full": "PWR: MAX",
+  "tooltip-format": "Draw: {power}W"
+},
 
-  "custom/kbd_backlight": {
-    "exec": "brightnessctl -d kbd_backlight i | grep -oP '\\d+%'",
-    "interval": 5,
-    "format": "KBD: {}"
-  },
+"custom/kbd_backlight": {
+  "exec": "brightnessctl -d kbd_backlight i | grep -oP '\\d+%'",
+  "interval": 5,
+  "format": "KBD: {}"
+},
 
-  "network": {
-    "format-wifi": "NET: {essid}",
-    "format-ethernet": "NET: WIRED",
-    "format-disconnected": "NET: OFFLINE",
-    "tooltip-format": "Signal: {signalStrength}%",
-    "max-length": 20,
-    "on-click": "kitty --class sys_wifi -e impala"
-  },
+"network": {
+  "format-wifi": "NET: {essid}",
+  "format-ethernet": "NET: WIRED",
+  "format-disconnected": "NET: OFFLINE",
+  "tooltip-format": "Signal: {signalStrength}%",
+  "on-click": "~/dotfiles/scripts/system/focus_or_launch.sh sys_wifi 'kitty --class sys_wifi -e impala'",
+  "max-length": 20
+},
 
-  "bluetooth": {
-    "format": "COM: ON",
-    "format-disabled": "COM: OFF",
-    "format-connected": "COM: {device_alias}",
-    "on-click": "kitty --class sys_bt -e bluetui",
-    "max-length": 15
-  },
+"bluetooth": {
+  "format": "COM: ON",
+  "format-disabled": "COM: OFF",
+  "format-connected": "COM: {device_alias}",
+  "tooltip-format": "{controller_alias}\t{controller_address}",
+  "on-click": "~/dotfiles/scripts/system/focus_or_launch.sh sys_bt 'kitty --class sys_bt -e bluetui'",
+  "max-length": 15
+},
 
-  "backlight": {
-    "format": "LUM: {percent}%"
-  },
 
-  "pulseaudio#microphone": {
-    "format": "MIC: {volume}%",
-    "format-muted": "MIC: MUTE",
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
-  },
+"backlight": {
+  "format": "LUM: {percent}%"
+},
 
-  "pulseaudio": {
-    "format": "AUD: {volume}%",
-    "format-muted": "AUD: MUTE",
-    "format-bluetooth": "AUD: {volume}% [BT]",
-    "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-  },
+"pulseaudio#microphone": {
+  "format": "MIC: {volume}%",
+  "format-muted": "MIC: MUTE",
+  "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+},
+
+"pulseaudio": {
+  "format": "AUD: {volume}%",
+  "format-muted": "AUD: MUTE",
+  "format-bluetooth": "AUD: {volume}% [BT]",
+  "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+},
 }

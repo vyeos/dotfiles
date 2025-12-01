@@ -1,2 +1,17 @@
 [general]
-copy-command = "wl-copy"
+copy-command = "sh -c 'wl-copy --type image/png'"
+early-exit = false
+initial-tool = "brush"
+
+[font]
+family = "JetBrainsMono Nerd Font"
+style = "Bold"
+
+# Force the UI to match
+[color-palette]
+palette = [
+  "#0d0d0d", # Black
+  "#ff5555", # Red
+  "#ffb86c", # Amber
+  "#e0e0e0", # White
+]

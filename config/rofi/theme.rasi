@@ -1,145 +1,58 @@
-/* Global defaults */
 * {
-  font: "JetBrainsMono Nerd Font 14"; /* Slightly larger for fullscreen */
-  
-  /* --- COLORS --- */
-  bg-col:  #0a1914;      /* Dark Forest Green Base */
-  bg-col-light: #1e1e2e; /* Slightly lighter for elements */
-  border-col: #a6e3a1;   /* Bright Green Accent */
-  selected-col: #a6e3a1; /* Green Selection */
-  fg-col: #cdd6f4;       /* White Text */
-  fg-col2: #1e1e2e;      /* Dark text for selected items */
-  
-  background-color: transparent;
-  text-color: @fg-col;
-  margin: 0px;
-  padding: 0px;
-  spacing: 0px;
+    bg-col:  #0d0d0d;
+    border-col: #ffb86c;
+    text-col: #e0e0e0;
+    sel-bg: #ffb86c;
+    sel-text: #0d0d0d;
+
+    background-color: @bg-col;
+    text-color: @text-col;
+    font: "JetBrainsMono Nerd Font 12";
 }
 
-/* ── Window ──────────────────────────────── */
-/* ── Global Settings ────────────────────────── */
-* {
-    font: "JetBrainsMono Nerd Font 14";
-
-    /* --- PALETTE --- */
-    /* Deep Void Green (Background) */
-    bg-col:         #050a08;
-    
-    /* Lighter Green (Input/Elements) */
-    bg-col-light:   #0f1c19;
-    
-    /* Sage/Neon Green (Accent) */
-    accent-col:     #a6e3a1;
-    
-    /* Text Colors */
-    fg-col:         #cdd6f4;
-    fg-col-muted:   #6c7086;
-    fg-col-selected:#050a08; /* Dark text on green background */
-
-    background-color: transparent;
-    text-color: @fg-col;
-    margin: 0px;
-    padding: 0px;
-    spacing: 0px;
-}
-
-/* ── Window ─────────────────────────────────── */
 window {
-    fullscreen: true;
-    transparency: "real";
-    
-    /* Dark overlay with slight transparency */
-    background-color: rgba(5, 10, 8, 0.96);
-    
-    /* Minimal border */
-    border: 0px;
-    border-color: @accent-col;
+    width: 600px;
+    border: 3px;
+    border-color: @border-col;
+    padding: 20px;
 }
 
-/* ── Main Layout ────────────────────────────── */
-mainbox {
-    orientation: vertical;
-    children: [ "inputbar", "listview" ];
-    
-    /* Centered narrow column for that "Terminal" feel */
-    padding: 25% 32%;
-    spacing: 20px;
-}
-
-/* ── Input Bar ──────────────────────────────── */
 inputbar {
-    children: [ "prompt", "entry" ];
-    background-color: transparent;
-    border: 2px;
-    border-color: @accent-col;
-    border-radius: 0px; /* Sharp corners */
+    children: [prompt, entry];
     margin: 0px 0px 10px 0px;
 }
 
 prompt {
-    background-color: @accent-col;
+    background-color: @border-col;
     text-color: @bg-col;
-    padding: 12px 16px;
-    font: "JetBrainsMono Nerd Font Bold 14";
+    padding: 5px 10px;
+    margin: 0px 10px 0px 0px;
 }
 
 entry {
-    background-color: transparent;
-    text-color: @accent-col; /* Green text while typing */
-    padding: 12px;
-    placeholder: "Search...";
-    placeholder-color: @fg-col-muted;
+    placeholder: "SYSTEM COMMAND...";
+    placeholder-color: #444444;
 }
 
-/* ── List ───────────────────────────────────── */
 listview {
-    columns: 1;
-    lines: 7;
-    spacing: 6px;
-    cycle: true;
-    dynamic: true;
+    lines: 10;
     scrollbar: false;
 }
 
-/* ── Elements (Rows) ────────────────────────── */
 element {
-    orientation: horizontal;
-    /* ADDED ICON HERE: */
-    children: [ "element-icon", "element-text" ];
-    padding: 10px 14px;
-    spacing: 12px;
-    border: 0px;
+    padding: 5px;
 }
 
-/* Icon Settings */
-element-icon {
-    size: 24px;
-    vertical-align: 0.5;
+element selected {
+    background-color: @sel-bg;
+    text-color: @sel-text;
 }
 
 element-text {
-    vertical-align: 0.5;
+    background-color: inherit;
     text-color: inherit;
 }
 
-/* ── States ─────────────────────────────────── */
-
-/* Normal Item */
-element normal.normal {
-    background-color: transparent;
-    text-color: @fg-col;
-}
-
-/* Selected Item */
-element selected.normal {
-    background-color: @accent-col;
-    text-color: @fg-col-selected;
-    border: 0px;
-}
-
-/* Alternate Rows (Optional - currently transparent) */
-element alternate.normal {
-    background-color: transparent;
-    text-color: @fg-col;
+element-icon {
+    size: 0px; /* NO ICONS. TEXT ONLY. */
 }

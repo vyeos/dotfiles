@@ -1,36 +1,32 @@
 [global]
-font = JetBrainsMono Nerd Font 12
-format = "<b>%s</b>\n%b"
-origin = top-right
-frame_width = 2
-# Global Green Frame
-frame_color = "#a3be8c"
-separator_height = 2
-padding = 14
-horizontal_padding = 14
-corner_radius = 4
-transparency = 0
-icon_position = left
-alignment = center
-follow = mouse
-highlight = "#a3be8c"
+    width = 350
+    height = 200
+    origin = top-right
+    offset = 20x20
+    font = JetBrainsMono Nerd Font 10
+    
+    # Boxy
+    corner_radius = 0
+    frame_width = 3
+    frame_color = "#ffb86c"
+    separator_color = frame
+
+    # Text
+    alignment = left
+    vertical_alignment = center
 
 [urgency_low]
-# Very Dark Green
-background = "#1a2b21"
-foreground = "#a3be8c"
-timeout = 2
+    background = "#0d0d0d"
+    foreground = "#888888"
+    timeout = 3
 
 [urgency_normal]
-# Deep Dark Green
-background = "#243c2f"
-foreground = "#eceff4"
-timeout = 2
+    background = "#0d0d0d"
+    foreground = "#e0e0e0"
+    timeout = 5
 
 [urgency_critical]
-# Darker Red background
-background = "#63282e"
-foreground = "#eceff4"
-# Green Frame to match your theme
-frame_color = "#a3be8c"
-timeout = 0
+    background = "#ff5555"
+    foreground = "#0d0d0d"
+    frame_color = "#ff5555"
+    timeout = 0

@@ -1,168 +1,61 @@
-@import "../theme/common.css";
-
 * {
   border: none;
-  font-family: "jetbrainsmono nerd font";
+  font-family: "JetBrainsMono Nerd Font";
   font-size: 13px;
   font-weight: bold;
+  min-height: 0;
 }
 
 window#waybar {
-  background: transparent;
+  background-color: #0d0d0d;
+  color: #e0e0e0;
+  border-bottom: 2px solid #ffb86c; /* Amber line at bottom */
 }
 
+/* Modules look like distinct blocks */
+#workspaces,
 #clock,
-#custom-power,
-#network,
-#bluetooth,
-#pulseaudio,
 #battery,
-#backlight,
-#custom-kbd_backlight {
-  padding: 0 14px;
-  margin: 4px 2px;
-}
-
-#clock {
-  color: @text;
-}
-#network {
-  color: @text;
-  opacity: 0.6;
-}
-#network.wifi,
-#network.ethernet {
-  color: @text; /* Connected: Green */
-  opacity: 1;
-}
-#network.disconnected {
-  color: @muted;
-  opacity: 0.4;
-}
-
-#bluetooth {
-  color: @text;
-}
-#bluetooth.disabled,
-#bluetooth.off {
-  color: @muted;
-  opacity: 0.4;
-}
-
+#cpu,
+#memory,
+#disk,
+#network,
 #pulseaudio,
-#pulseaudio-microphone {
-  padding: 0 10px;
-  font-weight: bold;
-  transition: color 0.3s ease;
+#tray {
+  background-color: #0d0d0d;
+  padding: 0px 15px;
+  margin: 5px 0px;
+  border-right: 1px solid #444444; /* Separator lines */
 }
 
-#pulseaudio {
-  color: @text;
-}
-#pulseaudio.muted {
-  color: @muted;
-  opacity: 0.5;
-  padding-right: 14px;
-}
-#pulseaudio.bluetooth {
-  color: @accent; /* Unified to accent */
-}
-
-/* Microphone */
-#pulseaudio-microphone {
-  color: @urgent; /* Using your Dark Red theme color */
-}
-#pulseaudio-microphone.muted {
-  color: @muted;
-  opacity: 0.5;
-}
-
-@keyframes recording-pulse {
-  0% {
-    color: @urgent;
-  }
-  50% {
-    color: @text;
-  } /* Blink between Red and White */
-  100% {
-    color: @urgent;
-  }
-}
-
-#pulseaudio-microphone:not(.muted) {
-  animation-name: recording-pulse;
-  animation-duration: 2s;
-  animation-iteration-count: infinite;
-}
-
-/* --- HARDWARE --- */
-#backlight {
-  color: @text;
-}
-
-#battery {
-  color: @text;
-}
-
-#battery.charging,
-#battery.plugged {
-  color: @text;
-}
-
-#battery.warning:not(.charging) {
-  color: @warn; /* Yellow replaced with Text/White for clean look */
-}
-
-/* CRITICAL BATTERY: Switched to Background color for visibility */
-#battery.critical:not(.charging) {
-  background-color: @urgent;
-  color: @text;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
-
-#battery.full {
-  color: @text;
-}
-
-#custom-kbd_backlight {
-  color: @text;
-}
-
-/* --- POWER --- */
-#custom-power {
-  color: @urgent;
-  padding-right: 18px;
-}
-
-/* --- WORKSPACES --- */
 #workspaces button {
-  all: initial;
-  padding: 0 6px;
-  margin: 0 1.5px;
-  min-width: 9px;
-  color: @muted;
+  padding: 0 5px;
+  color: #444444;
 }
 
 #workspaces button.active {
-  color: @text;
-}
-
-#workspaces button.empty {
-  opacity: 0.4;
+  color: #ffb86c;
+  border-bottom: 2px solid #ffb86c;
 }
 
 #workspaces button.urgent {
-  background-color: @urgent;
-  color: @text;
+  color: #ff5555;
+  background-color: #0d0d0d;
+  border: 1px solid #ff5555;
+}
+
+/* Alert states */
+#battery.critical,
+#network.disconnected {
+  color: #ff5555;
+  animation-name: blink;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
 }
 
 @keyframes blink {
   to {
-    background-color: @critical;
-    color: @urgent;
+    color: #0d0d0d;
+    background-color: #ff5555;
   }
 }

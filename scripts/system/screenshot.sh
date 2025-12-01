@@ -1,26 +1,34 @@
 #!/usr/bin/env bash
 
 SAVE_DIR="$HOME/Pictures/Screenshots"
-mkdir -p "$SAVE_DIR"
 
-if [ "$1" == "swappy" ]; then
-    # 1. Get selection
-    geometry=$(slurp)
-    
-    # 2. If user selected something (didn't press Esc during selection)
-    if [ -n "$geometry" ]; then
-        # Capture and pipe to swappy
-        # Swappy handles the saving/closing now via ~/.config/swappy/config
-        grim -g "$geometry" - | swappy -f -
-    fi
+case "$1" in
+    "satty")
+        # 1. Get selection. If user cancels (Esc), exit immediately.
+        # This prevents the script from doing unnecessary work.
+        geometry=$(slurp) || exit 0
 
-elif [ "$1" == "full" ]; then
-    # 1. Define filename
-    filename="$SAVE_DIR/screenshot-$(date +'%Y%m%d-%H%M%S').png"
+        # 2. Prepare environment only after confirmation
+        mkdir -p "$SAVE_DIR"
+        filename="$SAVE_DIR/screenshot-$(date +'%Y%m%d-%H%M%S').png"
+
+        # 3. Capture and edit
+        # --early-exit: Closes Satty immediately after you copy to clipboard (optional, remove if you dislike it)
+        grim -g "$geometry" - | satty --filename - --output-filename "$filename" 
+        ;;
+
+    "full")
+        # 1. Prepare environment
+        mkdir -p "$SAVE_DIR"
+        filename="$SAVE_DIR/screenshot-$(date +'%Y%m%d-%H%M%S').png"
+
+        # 2. Take shot
+        grim "$filename" && \
+        notify-send -u low -i "$filename" "Screenshot" "Saved Fullscreen"
+        ;;
     
-    # 2. Take shot
-    grim "$filename"
-    
-    # 3. Notify with image preview (Only for fullscreen, which is silent otherwise)
-    notify-send -u low -i "$filename" "Screenshot" "Saved Fullscreen"
-fi
+    *)
+        echo "Usage: $0 {satty|full}"
+        exit 1
+        ;;
+esac

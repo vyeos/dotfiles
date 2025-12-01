@@ -17,11 +17,8 @@ window#waybar {
 #battery,
 #backlight,
 #custom-kbd_backlight {
-  background: #1e1e2e;
   padding: 0 14px;
   margin: 4px 2px;
-  border-radius: 4px;
-  border: 1px solid #313244;
   color: #cdd6f4;
 }
 

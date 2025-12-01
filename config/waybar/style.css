@@ -1,3 +1,5 @@
+@import "../theme/common.css";
+
 * {
   border: none;
   font-family: "jetbrainsmono nerd font";
@@ -19,72 +21,71 @@ window#waybar {
 #custom-kbd_backlight {
   padding: 0 14px;
   margin: 4px 2px;
-  color: #cdd6f4;
 }
 
 #clock {
-  color: #98c379;
+  color: @text;
 }
-
 #network {
-  color: #6272a4; /* default: blue/grey (scanning/unknown) */
+  color: @text;
+  opacity: 0.6;
 }
 #network.wifi,
 #network.ethernet {
-  color: #98c379; /* connected: green */
+  color: @text; /* Connected: Green */
+  opacity: 1;
 }
 #network.disconnected {
-  color: #45475a; /* disconnected: dim grey */
+  color: @muted;
+  opacity: 0.4;
 }
 
 #bluetooth {
-  color: #98c379; /* connected: green */
+  color: @text;
 }
 #bluetooth.disabled,
 #bluetooth.off {
-  color: #45475a; /* off: dim grey */
+  color: @muted;
+  opacity: 0.4;
 }
 
 #pulseaudio,
 #pulseaudio-microphone {
   padding: 0 10px;
-  background-color: transparent;
   font-weight: bold;
   transition: color 0.3s ease;
 }
 
-/* --- OUTPUT (SPEAKERS) --- */
 #pulseaudio {
-  color: #98c379; /* active: green */
+  color: @text;
 }
-
 #pulseaudio.muted {
-  color: #45475a; /* muted: dim grey */
-  padding-right: 14px; /* Optical balance for the muted icon */
+  color: @muted;
+  opacity: 0.5;
+  padding-right: 14px;
 }
-
 #pulseaudio.bluetooth {
-  color: #61afef;
+  color: @accent; /* Unified to accent */
 }
 
-/* Note: The ID is hyphenated because of 'pulseaudio#microphone' */
+/* Microphone */
 #pulseaudio-microphone {
-  color: #e06c75; /* active: red (standard for recording) */
+  color: @urgent; /* Using your Dark Red theme color */
 }
-
 #pulseaudio-microphone.muted {
-  color: #45475a; /* muted: dim grey */
+  color: @muted;
+  opacity: 0.5;
 }
 
 @keyframes recording-pulse {
   0% {
-    color: #e06c75;
+    color: @urgent;
   }
   50% {
-    color: #be5046;
-  }
+    color: @text;
+  } /* Blink between Red and White */
   100% {
-    color: #e06c75;
+    color: @urgent;
   }
 }
 
@@ -94,25 +95,28 @@ window#waybar {
   animation-iteration-count: infinite;
 }
 
+/* --- HARDWARE --- */
 #backlight {
-  color: #98c379; /* always active */
+  color: @text;
 }
 
 #battery {
-  color: #61afef; /* 20% - 80%: blue */
+  color: @text;
 }
 
 #battery.charging,
 #battery.plugged {
-  color: #98c379; /* charging: green */
+  color: @text;
 }
 
 #battery.warning:not(.charging) {
-  color: #e5c07b; /* 10-20%: yellow */
+  color: @warn; /* Yellow replaced with Text/White for clean look */
 }
 
+/* CRITICAL BATTERY: Switched to Background color for visibility */
 #battery.critical:not(.charging) {
-  color: #e06c75; /* < 10%: red */
+  background-color: @urgent;
+  color: @text;
   animation-name: blink;
   animation-duration: 0.5s;
   animation-timing-function: linear;
@@ -121,45 +125,44 @@ window#waybar {
 }
 
 #battery.full {
-  color: #98c379;
+  color: @text;
 }
 
 #custom-kbd_backlight {
-  color: #98c379;
+  color: @text;
 }
 
-/* -- power button -- */
+/* --- POWER --- */
 #custom-power {
-  color: #f38ba8;
+  color: @urgent;
   padding-right: 18px;
 }
 
-/* 3. workspaces */
-
-/* --- workspaces (omarchy style) --- */
-
+/* --- WORKSPACES --- */
 #workspaces button {
   all: initial;
   padding: 0 6px;
   margin: 0 1.5px;
   min-width: 9px;
+  color: @muted;
 }
 
 #workspaces button.active {
-  color: #98c379; /* connected: green */
+  color: @text;
 }
 
 #workspaces button.empty {
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 #workspaces button.urgent {
-  background-color: #e06c75; /* red */
+  background-color: @urgent;
+  color: @text;
 }
 
 @keyframes blink {
   to {
-    background-color: #f38ba8;
-    color: #1e1e2e;
+    background-color: @critical;
+    color: @urgent;
   }
 }

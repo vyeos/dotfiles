@@ -19,11 +19,13 @@ highlight = "#a3be8c"
 # Very Dark Green
 background = "#1a2b21"
 foreground = "#a3be8c"
+timeout = 2
 
 [urgency_normal]
 # Deep Dark Green
 background = "#243c2f"
 foreground = "#eceff4"
+timeout = 2
 
 [urgency_critical]
 # Darker Red background
@@ -31,3 +33,4 @@ background = "#63282e"
 foreground = "#eceff4"
 # Green Frame to match your theme
 frame_color = "#a3be8c"
+timeout = 0

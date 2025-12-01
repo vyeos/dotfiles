@@ -1,0 +1,9 @@
+@define-color base #243c2f;
+@define-color dark #1a2b21;
+@define-color urgent #f38ba8;
+@define-color muted #eceff4;
+@define-color text #98c379;
+@define-color accent #61afef;
+@define-color warn #e5c07b;
+
+/* @define-color radius 5px; */

@@ -1,69 +1,109 @@
 #!/usr/bin/env bash
 
-# SEVASTOPOL OSD SERVER
-# Usage: ./osd_server.sh [vol+|vol-|bri+|bri-|mute]
+# Usage: ./audio_control.sh [speaker|mic|toggle-speaker|toggle-mic|vol-up|vol-down]
 
-# Theme Colors
-COLOR_ACCENT="#ffb86c" # Amber
-# ICON_DIR="/usr/share/icons/Papirus-Dark/16x16"
+STATE_FILE="/tmp/mic_last_state"
+COLOR_ACCENT="#ffb86c"
 
-# ---------------------------------------------------------
+# --- HELPER FUNCTIONS ---
 
-get_volume() {
-    wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}'
+get_status() {
+    local STATUS=$(wpctl get-volume $1)
+    if [[ $STATUS == *"[MUTED]"* ]]; then
+        echo "muted"
+    else
+        echo "unmuted"
+    fi
 }
 
-get_brightness() {
-    brightnessctl i | grep -oP '\d+%' | head -n1 | tr -d '%'
-}
-
-send_notification() {
-    TITLE=$1
-    VALUE=$2
-    ICON=$3
-    ID=$4
-
-    # dunstify arguments:
-    # -r : Replace existing ID (prevents stack piling)
-    # -h int:value:$VALUE : Shows the progress bar
-    # <span> : Colors the number Amber
-    dunstify -r "$ID" \
+send_osd() {
+    # Helper to send the Amber Sevastopol Notification
+    local VAL=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print int($2 * 100)}')
+    dunstify -r 1001 \
              -a "OSD" \
-             -i "" \
-             -h int:value:"$VALUE" \
-             "$TITLE" \
-             "Level: <span foreground='$COLOR_ACCENT' font_weight='bold'>${VALUE}%</span>"
+             -h int:value:"$VAL" \
+             "Volume" \
+             "Level: <span foreground='$COLOR_ACCENT' font_weight='bold'>${VAL}%</span>"
 }
+
+# --- MAIN LOGIC ---
 
 case $1 in
-    "vol+")
-        wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
-        VAL=$(get_volume)
-        send_notification "Volume" "$VAL" "audio-volume-high" 1001
-        ;;
-    "vol-")
-        wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
-        VAL=$(get_volume)
-        send_notification "Volume" "$VAL" "audio-volume-low" 1001
-        ;;
-    "mute")
-        wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
-        MUTED=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep "MUTED")
-        if [ -n "$MUTED" ]; then
-             dunstify -r 1001 -a "OSD" -i "" "Volume" "System <span foreground='#ff5555'>MUTED</span>"
+    "speaker")
+        # Waybar Module Logic
+        VOL_STR=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
+        if [[ $VOL_STR == *"[MUTED]"* ]]; then
+            printf '{"text": "AUD: MUTE", "class": "muted", "alt": "muted"}\n'
         else
-             VAL=$(get_volume)
-             send_notification "Volume" "$VAL" "audio-volume-high" 1001
+            VOL=$(echo "$VOL_STR" | awk '{print int($2 * 100)}')
+            printf '{"text": "AUD: %s%%", "class": "unmuted", "alt": "unmuted"}\n' "$VOL"
         fi
         ;;
-    "bri+")
-        brightnessctl s 5%+
-        VAL=$(get_brightness)
-        send_notification "Brightness" "$VAL" "display-brightness-high" 1002
+
+    "mic")
+        # Waybar Module Logic
+        VOL_STR=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)
+        if [[ $VOL_STR == *"[MUTED]"* ]]; then
+            printf '{"text": "MIC: MUTE", "class": "muted"}\n'
+        else
+            printf '{"text": "MIC: ON", "class": "unmuted"}\n'
+        fi
         ;;
-    "bri-")
-        brightnessctl s 5%-
-        VAL=$(get_brightness)
-        send_notification "Brightness" "$VAL" "display-brightness-low" 1002
+
+    "toggle-speaker")
+        # Toggle Logic: Mute All / Restore Mic
+        SINK_STATUS=$(get_status @DEFAULT_AUDIO_SINK@)
+        MIC_STATUS=$(get_status @DEFAULT_AUDIO_SOURCE@)
+
+        if [ "$SINK_STATUS" == "unmuted" ]; then
+            # Muting
+            if [ "$MIC_STATUS" == "muted" ]; then echo "1" > "$STATE_FILE"; else echo "0" > "$STATE_FILE"; fi
+            wpctl set-mute @DEFAULT_AUDIO_SINK@ 1
+            wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1
+            dunstify -r 1001 -a "OSD" "Volume" "System <span foreground='#ff5555'>MUTED</span>"
+        else
+            # Unmuting
+            wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
+            # Restore Mic
+            if [ -f "$STATE_FILE" ]; then
+                LAST_STATE=$(cat "$STATE_FILE")
+                wpctl set-mute @DEFAULT_AUDIO_SOURCE@ "$LAST_STATE"
+            else
+                wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1
+            fi
+            send_osd
+        fi
+        ;;
+
+    "toggle-mic")
+        # Blocking Logic: Cannot toggle if Speaker Muted
+        SINK_STATUS=$(get_status @DEFAULT_AUDIO_SINK@)
+        if [ "$SINK_STATUS" == "muted" ]; then
+            notify-send -u critical "Sevastopol Audio" "Cannot enable Mic while System Audio is Muted."
+        else
+            wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+        fi
+        ;;
+
+    "vol-up")
+        # --- NEW BLOCKING LOGIC ---
+        SINK_STATUS=$(get_status @DEFAULT_AUDIO_SINK@)
+        if [ "$SINK_STATUS" == "muted" ]; then
+            dunstify -r 1001 -u low "Volume Locked" "<span foreground='#ff5555'>Speakers are MUTED</span>"
+        else
+            wpctl set-volume -l 1.5 @DEFAULT_AUDIO_SINK@ 5%+
+            send_osd
+        fi
+        ;;
+
+    "vol-down")
+        # --- NEW BLOCKING LOGIC ---
+        SINK_STATUS=$(get_status @DEFAULT_AUDIO_SINK@)
+        if [ "$SINK_STATUS" == "muted" ]; then
+             dunstify -r 1001 -u low "Volume Locked" "<span foreground='#ff5555'>Speakers are MUTED</span>"
+        else
+            wpctl set-volume @DEFAULT_AUDIO_SINK@ 5%-
+            send_osd
+        fi
         ;;
 esac

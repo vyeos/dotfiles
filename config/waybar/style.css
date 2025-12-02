@@ -65,8 +65,7 @@ window#waybar {
   color: #ffb86c;
   background-color: #1a1a1a;
   border-top: 2px solid #ffb86c;
-  border-bottom: 2px solid #ffb86c;
-  /* Optional: Override the 'empty' dimness if you focus an empty workspace */
+  /* border-bottom: 2px solid #ffb86c; */
   opacity: 1;
 }
 

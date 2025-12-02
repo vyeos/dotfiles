@@ -5,11 +5,21 @@
     offset = 20x20
     font = JetBrainsMono Nerd Font 10
     
-    # Boxy
+    # --- BOXINESS (Sevastopol Style) ---
     corner_radius = 0
     frame_width = 3
     frame_color = "#ffb86c"
     separator_color = frame
+
+    # --- PROGRESS BARS (Volume/Brightness) ---
+    progress_bar = true
+    # Make it chunky/industrial
+    progress_bar_height = 12
+    progress_bar_frame_width = 1
+    progress_bar_min_width = 150
+    progress_bar_max_width = 300
+    # Zero rounding is critical for this theme
+    progress_bar_corner_radius = 0
 
     # Text
     alignment = left
@@ -18,15 +28,21 @@
 [urgency_low]
     background = "#0d0d0d"
     foreground = "#888888"
+    # The progress bar color
+    highlight = "#ffb86c"
     timeout = 3
 
 [urgency_normal]
     background = "#0d0d0d"
     foreground = "#e0e0e0"
+    # The progress bar color (Amber)
+    highlight = "#ffb86c"
     timeout = 5
 
 [urgency_critical]
     background = "#ff5555"
     foreground = "#0d0d0d"
     frame_color = "#ff5555"
+    # White bar on Red background for visibility
+    highlight = "#ffffff" 
     timeout = 0

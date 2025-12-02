@@ -20,8 +20,8 @@
   ],
   "modules-right": [
     "custom/recording",
-    "pulseaudio#microphone",
-    "pulseaudio",
+    "custom/audio_mic",
+    "custom/audio_speaker",
     "backlight",
     "custom/kbd_backlight",
     "battery",
@@ -85,7 +85,10 @@
 "custom/kbd_backlight": {
   "exec": "brightnessctl -d kbd_backlight i | grep -oP '\\d+%'",
   "interval": 5,
-  "format": "KBD: {}"
+  "format": "KBD: {}",
+  "on-click": "~/dotfiles/scripts/system/kbd-backlight.sh toggle",
+  "on-click-right": "~/dotfiles/scripts/system/kbd-backlight.sh gui",
+  "tooltip": false
 },
 
 "network": {
@@ -111,16 +114,20 @@
   "format": "LUM: {percent}%"
 },
 
-"pulseaudio#microphone": {
-  "format": "MIC: {volume}%",
-  "format-muted": "MIC: MUTE",
-  "on-click": "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+"custom/audio_mic": {
+  "exec": "~/dotfiles/scripts/system/audio_control.sh mic",
+  "return-type": "json",
+  "on-click": "~/dotfiles/scripts/system/audio_control.sh toggle-mic",
+  "interval": 1,
+  "tooltip": false
 },
 
-"pulseaudio": {
-  "format": "AUD: {volume}%",
-  "format-muted": "AUD: MUTE",
-  "format-bluetooth": "AUD: {volume}% [BT]",
-  "on-click": "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
+"custom/audio_speaker": {
+  "exec": "~/dotfiles/scripts/system/audio_control.sh speaker",
+  "return-type": "json",
+  "on-click": "~/dotfiles/scripts/system/audio_control.sh  toggle-speaker",
+  "on-click-right": "pavucontrol -t 3",
+  "interval": 1,
+  "tooltip": false
 },
 }

@@ -24,8 +24,8 @@ window#waybar {
 #battery,
 #network,
 #bluetooth,
-#pulseaudio,
-#pulseaudio.microphone,
+#custom-audio_speaker,
+#custom-audio_mic,
 #backlight,
 #custom-kbd_backlight,
 #custom-power,
@@ -92,15 +92,28 @@ window#waybar {
   background-color: #151515; /* Slightly lighter bg for clock */
 }
 
-/* Audio & Mic */
-#pulseaudio,
-#pulseaudio.microphone {
-  color: #8be9fd; /* Cyan tint for audio systems */
+/* --- CUSTOM AUDIO --- */
+
+#custom-audio_speaker,
+#custom-audio_mic {
+  background-color: #0d0d0d;
+  padding: 0px 12px;
+  margin: 4px 0px;
+  border-right: 1px solid #444444;
+  color: #8be9fd; /* Cyan tint for active systems */
 }
-#pulseaudio.muted,
-#pulseaudio.microphone.muted {
-  color: #444444;
+
+/* Muted State (Returned by the script) */
+#custom-audio_speaker.muted,
+#custom-audio_mic.muted {
+  color: #444444; /* Dim Grey */
   text-decoration: line-through;
+}
+
+/* Specific Tweak: Make Mic Red when Muted if you prefer */
+#custom-audio_mic.muted {
+  color: #ff5555;
+  text-decoration: none; /* Sevastopol style: Red text usually implies OFF/DANGER */
 }
 
 /* Battery Logic */

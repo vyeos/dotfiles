@@ -1,32 +1,35 @@
 gui:
   # Use your existing terminal borders (Sevastopol style)
-  # 'single' looks cleaner and more industrial than 'rounded'
   border: 'single'
   
   theme:
-    # 1. Borders (Amber)
+    # 1. Borders (Active = Amber, Inactive = Lighter Gray)
     activeBorderColor:
       - '#ffb86c'
       - 'bold'
     inactiveBorderColor:
-      - '#444444'
+      - '#777777' # Changed from #444444 to make it visible
     
     # 2. Selection (Black text on Amber bg)
     selectedLineBgColor:
       - '#ffb86c'
+    selectedLineFgColor: # Added this to force Black text on the Amber block
+      - '#0d0d0d'
     selectedRangeBgColor:
       - '#ffb86c'
+    selectedRangeFgColor:
+      - '#0d0d0d'
       
     # 3. Options (Keybindings in the menu)
     optionsTextColor:
-      - '#8be9fd' # Cyan for options acts as a nice secondary accent
+      - '#8be9fd' 
       
     # 4. Cherry Picking / Highlights
     cherryPickedCommitBgColor:
-      - '#50fa7b' # Green
+      - '#50fa7b'
     cherryPickedCommitFgColor:
       - '#0d0d0d'
     
-    # 5. Diff Highlights (Red/Green)
+    # 5. Text Colors
     defaultFgColor:
       - '#e0e0e0'

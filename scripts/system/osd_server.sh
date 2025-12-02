@@ -5,7 +5,7 @@
 
 # Theme Colors
 COLOR_ACCENT="#ffb86c" # Amber
-ICON_DIR="/usr/share/icons/dunst" # Adjust if you have custom icons
+# ICON_DIR="/usr/share/icons/Papirus-Dark/16x16"
 
 # ---------------------------------------------------------
 
@@ -29,7 +29,7 @@ send_notification() {
     # <span> : Colors the number Amber
     dunstify -r "$ID" \
              -a "OSD" \
-             -i "$ICON" \
+             -i "" \
              -h int:value:"$VALUE" \
              "$TITLE" \
              "Level: <span foreground='$COLOR_ACCENT' font_weight='bold'>${VALUE}%</span>"
@@ -50,7 +50,7 @@ case $1 in
         wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
         MUTED=$(wpctl get-volume @DEFAULT_AUDIO_SINK@ | grep "MUTED")
         if [ -n "$MUTED" ]; then
-             dunstify -r 1001 -a "OSD" -i "audio-volume-muted" "Volume" "System <span foreground='#ff5555'>MUTED</span>"
+             dunstify -r 1001 -a "OSD" -i "" "Volume" "System <span foreground='#ff5555'>MUTED</span>"
         else
              VAL=$(get_volume)
              send_notification "Volume" "$VAL" "audio-volume-high" 1001

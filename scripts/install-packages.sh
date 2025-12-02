@@ -10,6 +10,7 @@ sudo pacman -Syu --noconfirm hyprland kitty waybar \
     impala iwd jq \
     upower rtkit ripgrep rust go zig cargo gum \
     pavucontrol thunar gvfs thunar-volman nwg-look \
+    tumbler ffmpegthumbnailer poppler-glib\
     qt5-wayland qt6-wayland brightnessctl \
     nodejs npm imagemagick fzf \
     cups system-config-printer gutenprint \

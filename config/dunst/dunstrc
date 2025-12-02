@@ -1,48 +1,73 @@
 [global]
-    width = 350
-    height = 200
-    origin = top-right
-    offset = 20x20
-    font = JetBrainsMono Nerd Font 10
-    
-    # --- BOXINESS (Sevastopol Style) ---
-    corner_radius = 0
-    frame_width = 3
-    frame_color = "#ffb86c"
-    separator_color = frame
+# --- GEOMETRY ---
+width = 350
+# Dynamic height is usually better so single lines don't look huge
+height = (0, 200) 
+  origin = top-right
+offset = (20,20)
+  notification_limit = 5
 
-    # --- PROGRESS BARS (Volume/Brightness) ---
-    progress_bar = true
-    # Make it chunky/industrial
-    progress_bar_height = 12
-    progress_bar_frame_width = 1
-    progress_bar_min_width = 150
-    progress_bar_max_width = 300
-    # Zero rounding is critical for this theme
-    progress_bar_corner_radius = 0
+# --- APPEARANCE (Sevastopol) ---
+  font = JetBrainsMono Nerd Font Bold 12
+  icon_theme = Papirus-Dark
+  enable_recursive_icon_lookup = true
 
-    # Text
-    alignment = left
-    vertical_alignment = center
+# The "Boxy" Look
+  corner_radius = 0
+  frame_width = 3
+  frame_color = "#ffb86c"
 
-[urgency_low]
-    background = "#0d0d0d"
-    foreground = "#888888"
-    # The progress bar color
-    highlight = "#ffb86c"
-    timeout = 3
+# Separators (Lines between notifications)
+  separator_color = frame
+  separator_height = 2
 
-[urgency_normal]
-    background = "#0d0d0d"
-    foreground = "#e0e0e0"
-    # The progress bar color (Amber)
-    highlight = "#ffb86c"
-    timeout = 5
+# Padding (Internal spacing - crucial for the "Panel" look)
+  padding = 12
+  horizontal_padding = 12
+  text_icon_padding = 10
 
-[urgency_critical]
-    background = "#ff5555"
-    foreground = "#0d0d0d"
-    frame_color = "#ff5555"
-    # White bar on Red background for visibility
-    highlight = "#ffffff" 
-    timeout = 0
+# --- PROGRESS BARS ---
+  progress_bar = true
+# Chunky bars
+  progress_bar_height = 10
+  progress_bar_frame_width = 1
+  progress_bar_min_width = 150
+  progress_bar_max_width = 320
+  progress_bar_corner_radius = 0
+
+# Text
+  markup = full
+  alignment = left
+  vertical_alignment = center
+  ellipsize = middle
+
+# --- ICONS ---
+  icon_position = left
+  min_icon_size = 32
+  max_icon_size = 48
+
+  [urgency_low]
+# Dimmed state for low priority
+  background = "#0d0d0d"
+  foreground = "#666666" 
+  frame_color = "#ffb86c"
+  highlight = "#ffb86c"
+  timeout = 3
+
+  [urgency_normal]
+# Standard Sevastopol Interface
+  background = "#0d0d0d"
+  foreground = "#e0e0e0"
+  frame_color = "#ffb86c"
+  highlight = "#ffb86c"
+  timeout = 6
+
+  [urgency_critical]
+# HULL BREACH / ALARM STATE
+# Solid Red Background, Black Text
+  background = "#ff5555"
+  foreground = "#0d0d0d"
+  frame_color = "#ff5555"
+# Black progress bar on Red background (High Contrast Hazard style)
+  highlight = "#0d0d0d"
+  timeout = 0

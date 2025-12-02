@@ -6,7 +6,7 @@ cd ~
 
 echo "Linking configurations..."
 
-configs=(hypr kitty nvim rofi waybar dunst git swappy btop satty)
+configs=(hypr kitty nvim rofi waybar dunst git btop satty lazygit)
 
 for config in "${configs[@]}"; do
     rm -rf "$HOME/.config/$config"

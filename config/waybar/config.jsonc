@@ -79,6 +79,9 @@
   "format-charging": "PWR: {capacity}% [CHG]",
   "format-plugged": "PWR: {capacity}% [EXT]",
   "format-full": "PWR: MAX",
+  "tooltip-format-discharging": "Draw: {power}W",
+  "tooltip-format-charging": "Input: {power}W",
+  "tooltip-format-full": "Power Source: External",
   "tooltip-format": "Draw: {power}W"
 },
 

@@ -34,27 +34,6 @@ fi
 rm -rf "$HOME/.zshrc"
 ln -s "$HOME/dotfiles/config/.zshrc" "$HOME/.zshrc"
 
-echo "Setting up custom scripts..."
-
-chmod +x "$HOME/dotfiles/scripts/system/create-webapp.sh"
-chmod +x "$HOME/dotfiles/scripts/system/delete-webapp.sh"
-
-sudo ln -sf "$HOME/dotfiles/scripts/system/create-webapp.sh" /usr/local/bin/create-webapp
-sudo ln -sf "$HOME/dotfiles/scripts/system/delete-webapp.sh" /usr/local/bin/delete-webapp
-
-mkdir -p "$HOME/.local/share/applications"
-
-cat <<EOF > "$HOME/.local/share/applications/delete-webapp.desktop"
-[Desktop Entry]
-Name=Delete Webapp
-Comment=Remove an existing web app
-Exec=/usr/local/bin/delete-webapp
-Icon=user-trash
-Terminal=false
-Type=Application
-Categories=Utility;Settings;
-EOF
-
 echo "Setting fzf..."
 source <(fzf --zsh)
 

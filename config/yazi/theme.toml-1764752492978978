@@ -1,50 +1,51 @@
 # Sevastopol Station Theme for Yazi
 # Aesthetic: Industrial Lo-Fi Sci-Fi (Alien: Isolation)
+# vim:fileencoding=utf-8:foldmethod=marker
 
 # : Manager {{{
 
-[mgr]
-cwd = { fg = "#ffb86c" } # Primary Amber
+[manager]
+cwd = { fg = "#5fb3b3" } # Sevastopol Cyan
 
 # Hovered
 hovered = { reversed = true, bold = true }
 preview_hovered = { underline = true }
 
 # Find
-find_keyword = { fg = "#ffb86c", italic = true } # Primary Amber
-find_position = { fg = "#8be9fd", bg = "reset", italic = true } # Accent Cyan
+find_keyword = { fg = "#ebcb8b", italic = true } # Amber
+find_position = { fg = "#d08770", bg = "reset", italic = true } # Orange/Rust
 
 # Marker
 marker_copied = { fg = "#a3be8c", bg = "#a3be8c" } # Green
 marker_cut = { fg = "#bf616a", bg = "#bf616a" }    # Red
-marker_marked = { fg = "#8be9fd", bg = "#8be9fd" } # Accent Cyan
-marker_selected = { fg = "#ffb86c", bg = "#ffb86c" } # Primary Amber
+marker_marked = { fg = "#5fb3b3", bg = "#5fb3b3" } # Cyan
+marker_selected = { fg = "#ebcb8b", bg = "#ebcb8b" } # Amber
 
 # Tab
-tab_active = { fg = "#0e1013", bg = "#ffb86c" }    # Dark text on Primary Amber
+tab_active = { fg = "#0e1013", bg = "#5fb3b3" }    # Dark bg on Cyan
 tab_inactive = { fg = "#aab2bf", bg = "#2e3440" }  # Grey on Surface
 tab_width = 1
 
 # Count
 count_copied = { fg = "#0e1013", bg = "#a3be8c" }
 count_cut = { fg = "#0e1013", bg = "#bf616a" }
-count_selected = { fg = "#0e1013", bg = "#ffb86c" } # Amber
+count_selected = { fg = "#0e1013", bg = "#ebcb8b" }
 
 # Border
 border_symbol = "│"
-border_style = { fg = "#8be9fd" } # Accent Cyan for borders
+border_style = { fg = "#4c566a" } # Muted Grey
 
 # : }}}
 
 # : Mode {{{
 
 [mode]
-normal_main = { fg = "#0e1013", bg = "#ffb86c", bold = true } # Primary Amber Block
-normal_alt = { fg = "#ffb86c", bg = "#2e3440" }
-select_main = { fg = "#0e1013", bg = "#8be9fd", bold = true } # Accent Cyan Block
-select_alt = { fg = "#8be9fd", bg = "#2e3440" }
-unset_main = { fg = "#0e1013", bg = "#bd93f9", bold = true }  # Purple for Unset
-unset_alt = { fg = "#bd93f9", bg = "#2e3440" }
+normal_main = { fg = "#0e1013", bg = "#5fb3b3", bold = true } # Cyan block
+normal_alt = { fg = "#5fb3b3", bg = "#2e3440" }
+select_main = { fg = "#0e1013", bg = "#ebcb8b", bold = true } # Amber block
+select_alt = { fg = "#ebcb8b", bg = "#2e3440" }
+unset_main = { fg = "#0e1013", bg = "#b48ead", bold = true }  # Purple block
+unset_alt = { fg = "#b48ead", bg = "#2e3440" }
 
 # : }}}
 
@@ -56,15 +57,15 @@ sep_right = { open = "", close = "" }
 overall = { }
 
 # Progress
-progress_label = { fg = "#ffb86c", bold = true } # Amber
+progress_label = { fg = "#eceff4", bold = true }
 progress_normal = { fg = "#4c566a", bg = "#2e3440" }
 progress_error = { fg = "#bf616a", bg = "#2e3440" }
 
 # Permissions
 perm_type = { fg = "#4c566a" }
-perm_read = { fg = "#ffb86c" } # Amber
-perm_write = { fg = "#bf616a" } # Red
-perm_exec = { fg = "#8be9fd" } # Cyan
+perm_read = { fg = "#ebcb8b" }
+perm_write = { fg = "#bf616a" }
+perm_exec = { fg = "#a3be8c" }
 perm_sep = { fg = "#4c566a" }
 
 # : }}}
@@ -72,8 +73,8 @@ perm_sep = { fg = "#4c566a" }
 # : Select {{{
 
 [pick]
-border = { fg = "#8be9fd" } # Accent Cyan
-active = { fg = "#ffb86c", bold = true } # Primary Amber
+border = { fg = "#5fb3b3" }
+active = { fg = "#b48ead", bold = true }
 inactive = {}
 
 # : }}}
@@ -81,9 +82,9 @@ inactive = {}
 # : Input {{{
 
 [input]
-border = { fg = "#8be9fd" } # Accent Cyan
-title = { fg = "#ffb86c" }
-value = { fg = "#eceff4" }
+border = { fg = "#5fb3b3" }
+title = {}
+value = {}
 selected = { reversed = true }
 
 # : }}}
@@ -91,8 +92,8 @@ selected = { reversed = true }
 # : Tasks {{{
 
 [tasks]
-border = { fg = "#8be9fd" }
-title = { fg = "#ffb86c" }
+border = { fg = "#4c566a" }
+title = {}
 hovered = { underline = true }
 
 # : }}}
@@ -101,9 +102,9 @@ hovered = { underline = true }
 
 [which]
 mask = { bg = "#2e3440" }
-cand = { fg = "#ffb86c" } # Amber
+cand = { fg = "#5fb3b3" }
 rest = { fg = "#4c566a" }
-desc = { fg = "#8be9fd" } # Cyan
+desc = { fg = "#ebcb8b" }
 separator = "  "
 separator_style = { fg = "#4c566a" }
 
@@ -112,8 +113,8 @@ separator_style = { fg = "#4c566a" }
 # : Help {{{
 
 [help]
-on = { fg = "#8be9fd" } # Cyan
-run = { fg = "#ffb86c" } # Amber
+on = { fg = "#5fb3b3" }
+run = { fg = "#b48ead" }
 hovered = { reversed = true, bold = true }
 footer = { fg = "#0e1013", bg = "#aab2bf" }
 
@@ -122,8 +123,8 @@ footer = { fg = "#0e1013", bg = "#aab2bf" }
 # : Notify {{{
 
 [notify]
-title_info = { fg = "#8be9fd" } # Cyan
-title_warn = { fg = "#ffb86c" } # Amber
+title_info = { fg = "#a3be8c" }
+title_warn = { fg = "#ebcb8b" }
 title_error = { fg = "#bf616a" }
 
 # : }}}
@@ -133,21 +134,21 @@ title_error = { fg = "#bf616a" }
 [filetype]
 rules = [
   # Images
-  { mime = "image/*", fg = "#bd93f9" }, # Purple
+  { mime = "image/*", fg = "#b48ead" }, # Purple
 
   # Media
-  { mime = "{audio,video}/*", fg = "#f1fa8c" }, # Yellow
+  { mime = "{audio,video}/*", fg = "#d08770" }, # Orange
 
   # Archives
   { mime = "application/*zip", fg = "#bf616a" }, # Red
   { mime = "application/x-{tar,bzip*,7z-compressed,xz,rar}", fg = "#bf616a" },
 
   # Documents
-  { mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#8be9fd" }, # Cyan
+  { mime = "application/{pdf,doc,rtf,vnd.*}", fg = "#88c0d0" }, # Light Blue
 
   # Fallback
   { name = "*", fg = "#eceff4" }, # White
-  { name = "*/", fg = "#ffb86c" }, # Primary Amber for Folders
+  { name = "*/", fg = "#5fb3b3" }, # Cyan
 ]
 
 # : }}}
@@ -155,11 +156,11 @@ rules = [
 # : Confirmation {{{
 
 [confirm]
-border = { fg = "#8be9fd" }
-title = { fg = "#ffb86c" }
+border = { fg = "#5fb3b3" }
+title = { fg = "#5fb3b3" }
 content = { fg = "#eceff4" }
 body = { fg = "#bf616a" }
-list = { fg = "#8be9fd" }
+list = { fg = "#ebcb8b" }
 btn_yes = { reversed = true, fg = "#a3be8c" }
 btn_no = {}
 btn_labels = [ "  [Y]es  ", "  (N)o  " ]
@@ -169,8 +170,8 @@ btn_labels = [ "  [Y]es  ", "  (N)o  " ]
 # : Completion {{{
 
 [cmp]
-border = { fg = "#8be9fd" }
-active = { reversed = true, fg = "#ffb86c" } # Amber reversed
+border = { fg = "#5fb3b3" }
+active = { reversed = true, fg = "#eceff4" }
 inactive = { fg = "#4c566a" }
 
 # : }}}

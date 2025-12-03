@@ -3,7 +3,7 @@
 
 # : Manager {{{
 
-[mgr]
+[manager]
 cwd = { fg = "#ffb86c" } # Primary Amber
 
 # Hovered

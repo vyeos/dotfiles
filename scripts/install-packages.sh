@@ -15,7 +15,7 @@ sudo pacman -Syu --noconfirm hyprland kitty waybar \
     nodejs npm imagemagick fzf \
     cups system-config-printer gutenprint \
     spotify-player wf-recorder ffmpeg libreoffice-fresh \
-    xdg-desktop-portal-hyprland pipewirer\
+    xdg-desktop-portal-hyprland pipewire\
     imv mpv bat file \
     rclone fuse3\
 
@@ -25,7 +25,7 @@ makepkg -si --noconfirm
 cd ..
 rm -rf yay-bin
 
-yay -Syu --noconfirm hyprpaper hyprpicker-git github-cli brave-bin hyprpolkitagent localsend-bin losslesscut-bin
+yay -Syu --noconfirm hyprpaper hyprpicker-git github-cli hyprpolkitagent localsend-bin losslesscut-bin
 
 sudo pacman -Syu --noconfirm
 yay -Syu --noconfirm

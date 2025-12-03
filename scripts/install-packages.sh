@@ -7,9 +7,9 @@ sudo pacman -Syu --noconfirm hyprland kitty waybar \
     yad dunst fastfetch ttf-jetbrains-mono-nerd noto-fonts-emoji \
     pamixer slurp grim ntfs-3g wireplumber \
     bluez bluez-utils bluetui \
-    impala iwd jq \
+    impala iwd jq yazi\
     upower rtkit ripgrep rust go zig cargo gum \
-    pavucontrol thunar gvfs thunar-volman nwg-look \
+    pavucontrol nwg-look \
     tumbler ffmpegthumbnailer poppler-glib\
     qt5-wayland qt6-wayland brightnessctl \
     nodejs npm imagemagick fzf \

@@ -1,0 +1,32 @@
+# ~/.config/yazi/theme.toml
+
+[manager]
+# The active directory pane
+cwd = { fg = "#YOUR_ACCENT_COLOR", italic = true }
+
+# The file cursor (the bar moving up/down)
+hovered = { fg = "#1e1e2e", bg = "#YOUR_ACCENT_COLOR" }
+preview_hovered = { underline = true }
+
+# Tabs at the top
+tab_active = { fg = "#1e1e2e", bg = "#YOUR_ACCENT_COLOR" }
+tab_inactive = { fg = "#a6adc8", bg = "#313244" }
+
+[status]
+# The status bar at the bottom
+separator_open  = ""
+separator_close = ""
+
+# Modes (Normal, Select, Unset)
+mode_normal = { fg = "#1e1e2e", bg = "#ffb86c", bold = true }
+mode_select = { fg = "#1e1e2e", bg = "#a6e3a1", bold = true }
+mode_unset  = { fg = "#1e1e2e", bg = "#f2cdcd", bold = true }
+
+[filetype]
+# Color coding files by type
+rules = [
+    { mime = "image/*", fg = "#f9e2af" },
+    { mime = "video/*", fg = "#f9e2af" },
+    { mime = "audio/*", fg = "#f9e2af" },
+    { mime = "application/zip", fg = "#f5c2e7" },
+]

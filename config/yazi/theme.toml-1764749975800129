@@ -1,0 +1,67 @@
+# Sevastopol Station Theme for Yazi
+# Aesthetic: Industrial Lo-Fi Sci-Fi (Alien: Isolation)
+
+[manager]
+# The current working directory (Top left) - CRT Amber
+cwd = { fg = "#ffb86c", italic = true, bold = true }
+
+# The cursor selection - Industrial Grey background with Amber text
+hovered = { fg = "#ffb86c", bg = "#2d2f33", bold = true }
+preview_hovered = { underline = true }
+
+# Selection markers (when you press space on files)
+find_keyword = { fg = "#ffb86c", italic = true }
+find_position = { fg = "#ff5555", bg = "reset", italic = true }
+marker_selected = { fg = "#50fa7b", bg = "#2d2f33" }     # Green for selected
+marker_copied   = { fg = "#ffb86c", bg = "#2d2f33" }     # Amber for copied
+marker_cut      = { fg = "#ff5555", bg = "#2d2f33" }     # Red for cut
+
+# Tab bar
+tab_active = { fg = "#101010", bg = "#ffb86c", bold = true } # Black text on Amber
+tab_inactive = { fg = "#6272a4", bg = "#101010" }
+tab_width = 1
+
+# Borders and Layout
+border_symbol = "│"
+border_style = { fg = "#44475a" }
+
+[status]
+# The bottom status bar - A mix of utilitarian green and amber
+separator_open  = ""
+separator_close = ""
+separator_style = { fg = "#2d2f33", bg = "#2d2f33" }
+
+# Mode indicators (Normal, Select, Unset)
+mode_normal = { fg = "#101010", bg = "#ffb86c", bold = true } # Amber (Standard)
+mode_select = { fg = "#101010", bg = "#50fa7b", bold = true } # Green (Selection)
+mode_unset  = { fg = "#101010", bg = "#ff5555", bold = true } # Red (Danger)
+
+progress_label = { fg = "#ffffff", bold = true }
+progress_normal = { fg = "#44475a", bg = "#2d2f33" }
+progress_error = { fg = "#ff5555", bg = "#2d2f33" }
+
+[input]
+border = { fg = "#ffb86c" }
+title  = { fg = "#ffb86c" }
+value  = { fg = "#f8f8f2" }
+selected = { fg = "#2d2f33", bg = "#ffb86c" }
+
+[filetype]
+rules = [
+    # Images - Cyan
+    { mime = "image/*", fg = "#8be9fd" },
+    # Videos - Purple
+    { mime = "video/*", fg = "#bd93f9" },
+    # Audio - Pink
+    { mime = "audio/*", fg = "#ff79c6" },
+    # Archives - Red/Orange
+    { mime = "application/zip", fg = "#ffb86c" },
+    { mime = "application/gzip", fg = "#ffb86c" },
+    { mime = "application/x-tar", fg = "#ffb86c" },
+    # Documents - Green
+    { mime = "application/pdf", fg = "#50fa7b" },
+    # Directories - Bold Blue/Grey
+    { is_dir = true, fg = "#6272a4", bold = true },
+    # Executables - Green
+    { is_exec = true, fg = "#50fa7b", bold = true },
+]

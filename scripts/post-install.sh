@@ -6,7 +6,7 @@ cd ~
 
 echo "Linking configurations..."
 
-configs=(hypr kitty nvim rofi waybar dunst git btop satty lazygit)
+configs=(hypr kitty nvim rofi waybar dunst git btop satty lazygit fastfetch systemd)
 
 for config in "${configs[@]}"; do
     rm -rf "$HOME/.config/$config"
@@ -65,6 +65,18 @@ echo "Setting Losslesscut..."
 sudo mkdir -p /usr/share/losslesscut/resources/
 sudo ln -sf /usr/bin/ffmpeg /usr/share/losslesscut/resources/ffmpeg
 sudo ln -sf /usr/bin/ffprobe /usr/share/losslesscut/resources/ffprobe
+
+echo "Setting defualt web browser..."
+xdg-settings set default-web-browser firefox.desktop
+xdg-mime default firefox.desktop x-scheme-handler/http
+xdg-mime default firefox.desktop x-scheme-handler/https
+xdg-mime default firefox.desktop text/html
+
+echo "Setting up rclone..."
+rclone config
+systemctl --user daemon-reload
+systemctl --user enable rclone@google-drive
+systemctl --user start rclone@google-drive
 
 echo "Setup Complete! Please restart your shell or log out."
 

@@ -4,13 +4,13 @@ fi
 export ZSH="$HOME/.oh-my-zsh"
 export EDITOR="nvim"
 export VISUAL="nvim"
+export BROWSER="firefox"
 
 # ZSH_THEME="powerlevel10k/powerlevel10k"
 ZSH_THEME="robbyrussell"
 
 alias zshconf="nvim ~/.zshrc"
 alias lg='lazygit'
-alias gh-profile='gh api user --jq ".html_url" | xargs open'
 alias gor="go run ."
 alias shadcn="pnpm dlx shadcn@latest"
 alias ghconf="nvim ~/.config/ghostty/config"

@@ -1,0 +1,20 @@
+_______________________________________________________
+/                                                       \
+|  SEVASTOPOL STATION // APOLLO CORE // TERMINAL 939    |
+| ----------------------------------------------------- |
+|  >_ ACCESS LEVEL:     [ ENGINEERING ]                 |
+|  >_ SECURITY PROTO:   [ ENABLED ]                     |
+|  >_ UPLINK STATUS:    [ 404 - SIGNAL LOST ]           |
+|                                                       |
+|  [SYSTEM DIAGNOSTICS]                                 |
+|   + CPU TEMP: ........ 98% (CRITICAL)                 |
+|   + MEMORY INTEGRITY:  OK                             |
+|   + HULL PRESSURE: ... STABLE                         |
+|                                                       |
+|  [WARNING LOGS]                                       |
+|   ! UNKNOWN BIOSIGNATURE DETECTED: SECTOR 4           |
+|   ! VENTILATION SHAFT MAINTENANCE OVERDUE             |
+|                                                       |
+|  INITIATING MANUAL OVERRIDE...                        |
+|  [|||||||||||||||||||||||||.....]  82%                |
+\_______________________________________________________/

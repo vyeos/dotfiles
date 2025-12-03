@@ -1,0 +1,14 @@
++=======================================+
+| SEVASTOPOL STATION // DIAGNOSTIC UNIT |
++=======================================+
+|                                       |
+|  SYSTEM STATUS: [ OK ]                |
+|  REACTOR CORE:  [ STABLE ]            |
+|  COMM. ARRAY:   [ OFFLINE ]           |
+|                                       |
+|  >_ INITIALIZING KERNEL...            |
+|  >_ MOUNTING DRIVES...                |
+|  >_ WEYLAND-YUTANI OS v.939           |
+|                                       |
+|  [||||||||||||||||||||||....] 88%     |
++=======================================+

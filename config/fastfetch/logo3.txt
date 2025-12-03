@@ -1,0 +1,15 @@
+       .---.
+      /     \     [SPECIMEN: ARCH-X]
+     /   _   \    ------------------
+    /   ( )   \   STATUS: EVOLVING
+   |    _|_    |  ORIGIN: AUR-426
+   |   / | \   |  THREAT: CRITICAL
+   |   \_|_/   |
+    \    |    /   "Its structural
+     \   |   /     perfection is
+      \  |  /      matched only by
+       '-|-'       its hostility."
+         '
+       /   \
+      |     |
+       \___/

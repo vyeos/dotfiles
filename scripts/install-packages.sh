@@ -16,6 +16,8 @@ sudo pacman -Syu --noconfirm hyprland kitty waybar \
     cups system-config-printer gutenprint \
     spotify-player wf-recorder ffmpeg libreoffice-fresh \
     xdg-desktop-portal-hyprland pipewirer\
+    imv mpv bat file \
+    rclone fuse3\
 
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin

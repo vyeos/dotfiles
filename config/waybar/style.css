@@ -105,8 +105,8 @@ window#waybar {
 /* Muted State (Returned by the script) */
 #custom-audio_speaker.muted,
 #custom-audio_mic.muted {
-  color: #444444; /* Dim Grey */
-  text-decoration: line-through;
+  color: #ff5555;
+  text-decoration: none; /* Sevastopol style: Red text usually implies OFF/DANGER */
 }
 
 /* Specific Tweak: Make Mic Red when Muted if you prefer */

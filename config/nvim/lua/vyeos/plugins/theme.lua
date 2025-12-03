@@ -53,7 +53,7 @@ return {
 				inverse = true,
 				contrast = "",
 				dim_inactive = false,
-				transparent_mode = false,
+				transparent_mode = true,
 			})
 
 			-- The "_G" makes it available everywhere in Neovim

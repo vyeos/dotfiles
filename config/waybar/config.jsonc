@@ -19,10 +19,9 @@
     "clock"
   ],
   "modules-right": [
+    "group/hardware",
     "custom/recording",
     "custom/audio_mic",
-    // "custom/audio_speaker",
-    // "backlight",
     "custom/kbd_backlight",
     "battery",
     "custom/power"
@@ -73,6 +72,25 @@
   "interval": 1,
   "format": "T-TIME: {:%H:%M:%S}",
   "tooltip-format": "{:%A, %d-%m-%Y}"
+},
+
+"group/hardware": {
+    "orientation": "horizontal",
+    "drawer": {
+        "transition-duration": 500,
+        "children-class": "not-memory",
+        "transition-left-to-right": false
+    },
+    "modules": [
+        "custom/arrow-icon",
+        "custom/audio_speaker",
+        "custom/kbd_backlight"
+    ]
+},
+
+"custom/arrow-icon": {
+    "format": "  ",
+    "tooltip": false
 },
 
 "custom/recording": {
@@ -129,7 +147,8 @@
   "tooltip-format-discharging": "Draw: {power}W",
   "tooltip-format-charging": "Input: {power}W",
   "tooltip-format-full": "Power Source: External",
-  "tooltip-format": "Draw: {power}W"
+  "tooltip-format": "Draw: {power}W",
+  "on-click": "~/dotfiles/scripts/system/powersave.sh"
 },
 
 "custom/power": {

@@ -37,9 +37,9 @@ window#waybar {
   border-right: 1px solid #444444;
 }
 
-/* Remove border from the last item so it looks clean */
-#custom-power {
-  border-right: none;
+#custom-header {
+  color: #ffb86c;
+  font-weight: 900;
 }
 
 /* --- WORKSPACES --- */
@@ -53,23 +53,19 @@ window#waybar {
   transition: color 0.2s ease;
 }
 
-/* 2. EMPTY STATE (Persistent workspace, no windows) */
 /* "Standby" - Dim Grey */
 #workspaces button.empty {
   color: #444444;
 }
 
-/* 3. ACTIVE STATE (Currently focused) */
 /* "Focus" - Amber with borders */
 #workspaces button.active {
   color: #ffb86c;
-  background-color: #1a1a1a;
+  background-color: #1a0e00;
   border-top: 2px solid #ffb86c;
-  /* border-bottom: 2px solid #ffb86c; */
   opacity: 1;
 }
 
-/* 4. URGENT STATE (Notification) */
 /* "Alert" - Red Blink */
 #workspaces button.urgent {
   color: #ff5555;
@@ -79,40 +75,59 @@ window#waybar {
   animation-iteration-count: infinite;
 }
 
-/* --- SPECIFIC COLORS --- */
+/* Network Logic */
+/* "Standby" - Tungsten White */
+#network,
+#bluetooth,
+#network.disconnected,
+#bluetooth.discoverable {
+  color: #e0e0e0;
+}
 
-#custom-header {
+/* "Link Established" - Amber */
+#network.wifi,
+#network.ethernet,
+#network.linked,
+#bluetooth.connected {
   color: #ffb86c;
-  font-weight: 900;
+  background-color: #1a0e00;
+}
+
+/* "System Failure/Offline" - Red with Dark Background */
+#network.disabled,
+#network.off,
+#bluetooth.off,
+#bluetooth.disabled {
+  color: #ff5555;
+  background-color: #1a0000;
 }
 
 #clock {
-  color: #e0e0e0;
-  background-color: #151515; /* Slightly lighter bg for clock */
+  border-left: 1px solid #444444;
+  color: #8be9fd; /* Cyan tint for active systems */
+  background-color: #00121a;
+}
+
+/* Recording State */
+#custom-recording {
+  color: #8be9fd; /* Cyan tint for active systems */
+  background-color: #00121a;
 }
 
 /* --- CUSTOM AUDIO --- */
 
 #custom-audio_speaker,
 #custom-audio_mic {
-  background-color: #0d0d0d;
-  padding: 0px 12px;
-  margin: 4px 0px;
-  border-right: 1px solid #444444;
-  color: #8be9fd; /* Cyan tint for active systems */
+  color: #ffb86c;
+  background-color: #1a0e00;
 }
 
 /* Muted State (Returned by the script) */
 #custom-audio_speaker.muted,
 #custom-audio_mic.muted {
   color: #ff5555;
-  text-decoration: none; /* Sevastopol style: Red text usually implies OFF/DANGER */
-}
-
-/* Specific Tweak: Make Mic Red when Muted if you prefer */
-#custom-audio_mic.muted {
-  color: #ff5555;
-  text-decoration: none; /* Sevastopol style: Red text usually implies OFF/DANGER */
+  background-color: #1a0000;
+  text-decoration: none;
 }
 
 /* Battery Logic */
@@ -133,41 +148,11 @@ window#waybar {
   animation-iteration-count: infinite;
 }
 
-/* Network Logic */
-/* "Standby" - Tungsten White */
-#network,
-#bluetooth,
-#network.disconnected,
-#bluetooth.discoverable {
-  color: #e0e0e0;
-}
-
-/* "Link Established" - Amber */
-#network.wifi,
-#network.ethernet,
-#network.linked,
-#bluetooth.connected {
-  color: #ffb86c;
-}
-
-/* "System Failure/Offline" - Red with Dark Background */
-#network.disabled,
-#network.off,
-#bluetooth.off,
-#bluetooth.disabled {
-  color: #ff5555;
-  background-color: #1a0000; /* Dark Red Warning BG */
-}
-
-/* Recording State */
-#custom-recording {
-  color: #ff5555;
-  background-color: #2a0000;
-}
-
 /* Power Button */
 #custom-power {
   color: #ff5555;
+  background-color: #1a0000;
+  border-right: none;
   padding-right: 15px;
 }
 

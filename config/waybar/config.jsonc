@@ -11,7 +11,7 @@
   "modules-left": [
     "custom/header",
     "hyprland/workspaces",
-    "custom/separator",
+    // "custom/separator",
     "network",
     "bluetooth"
   ],
@@ -21,8 +21,8 @@
   "modules-right": [
     "custom/recording",
     "custom/audio_mic",
-    "custom/audio_speaker",
-    "backlight",
+    // "custom/audio_speaker",
+    // "backlight",
     "custom/kbd_backlight",
     "battery",
     "custom/power"
@@ -48,16 +48,31 @@
   }
 },
 
-"clock": {
-  "interval": 1,
-  "format": "T-TIME: {:%H:%M:%S}", // Seconds are crucial for sci-fi
-  "tooltip-format": "{:%Y-%m-%d}"
+"bluetooth": {
+  "format": "COM: IDLE",           // Controller on, no device connected
+  "format-disabled": "COM: OFF",   // Controller powered off (rfkill)
+  "format-off": "COM: OFF",        // Fallback
+  "format-connected": "COM: {device_alias}", // Device connected
+  "on-click": "rfkill toggle bluetooth",
+  "on-click-right": "~/dotfiles/scripts/system/focus_or_launch.sh sys_bt 'kitty --class sys_bt -e bluetui'",
+  "max-length": 15
 },
 
-"custom/power": {
-  "format": " [SYSTEM_HALT] ",
-  "tooltip": false,
-  "on-click": "/home/vyeos/dotfiles/scripts/system/powermenu.sh"
+"network": {
+  "format-wifi": "NET: {essid}",
+  "format-ethernet": "NET: WIRED",
+  "format-disconnected": "NET: IDLE",
+  "format-disabled": "NET: OFF",
+  "tooltip-format-wifi": "Signal: {signalStrength}%",
+  "on-click": "rfkill toggle wifi",
+  "on-click-right": "~/dotfiles/scripts/system/focus_or_launch.sh sys_wifi 'kitty --class sys_wifi -e impala'",
+  "max-length": 20
+},
+
+"clock": {
+  "interval": 1,
+  "format": "T-TIME: {:%H:%M:%S}",
+  "tooltip-format": "{:%A, %d-%m-%Y}"
 },
 
 "custom/recording": {
@@ -65,6 +80,38 @@
   "interval": 1,
   "exec": "echo 'REC: ON'",
   "exec-if": "pgrep wf-recorder",
+  "tooltip": false
+},
+
+"custom/audio_mic": {
+  "exec": "~/dotfiles/scripts/system/audio_control.sh mic",
+  "return-type": "json",
+  "on-click": "~/dotfiles/scripts/system/audio_control.sh toggle-mic",
+  "interval": 1,
+  "tooltip": false
+},
+
+"custom/audio_speaker": {
+  "exec": "~/dotfiles/scripts/system/audio_control.sh speaker",
+  "return-type": "json",
+  "on-click": "~/dotfiles/scripts/system/audio_control.sh  toggle-speaker",
+  "on-click-right": "pavucontrol -t 3",
+  "interval": 1,
+  "tooltip": false
+},
+
+"custom/kbd_backlight": {
+  "exec": "brightnessctl -d kbd_backlight i | grep -oP '\\d+%'",
+  "interval": 5,
+  "format": "KBD: {}",
+  "on-click": "~/dotfiles/scripts/system/kbd-backlight.sh toggle",
+  "on-click-right": "~/dotfiles/scripts/system/kbd-backlight.sh gui",
+  "tooltip": false
+},
+
+
+"backlight": {
+  "format": "LUM: {percent}%",
   "tooltip": false
 },
 
@@ -85,54 +132,9 @@
   "tooltip-format": "Draw: {power}W"
 },
 
-"custom/kbd_backlight": {
-  "exec": "brightnessctl -d kbd_backlight i | grep -oP '\\d+%'",
-  "interval": 5,
-  "format": "KBD: {}",
-  "on-click": "~/dotfiles/scripts/system/kbd-backlight.sh toggle",
-  "on-click-right": "~/dotfiles/scripts/system/kbd-backlight.sh gui",
-  "tooltip": false
-},
-
-"bluetooth": {
-    "format": "COM: IDLE",           // Controller on, no device connected
-    "format-disabled": "COM: OFF",   // Controller powered off (rfkill)
-    "format-off": "COM: OFF",        // Fallback
-    "format-connected": "COM: {device_alias}", // Device connected
-    "on-click": "rfkill toggle bluetooth",
-    "on-click-right": "~/dotfiles/scripts/system/focus_or_launch.sh sys_bt 'kitty --class sys_bt -e bluetui'",
-    "max-length": 15
-},
-
-"network": {
-    "format-wifi": "NET: {essid}",
-    "format-ethernet": "NET: WIRED",
-    "format-disconnected": "NET: IDLE",
-    "format-disabled": "NET: OFF",
-    "tooltip-format-wifi": "Signal: {signalStrength}%",
-    "on-click": "rfkill toggle wifi",
-    "on-click-right": "~/dotfiles/scripts/system/focus_or_launch.sh sys_wifi 'kitty --class sys_wifi -e impala'",
-    "max-length": 20
-},
-
-"backlight": {
-  "format": "LUM: {percent}%"
-},
-
-"custom/audio_mic": {
-  "exec": "~/dotfiles/scripts/system/audio_control.sh mic",
-  "return-type": "json",
-  "on-click": "~/dotfiles/scripts/system/audio_control.sh toggle-mic",
-  "interval": 1,
-  "tooltip": false
-},
-
-"custom/audio_speaker": {
-  "exec": "~/dotfiles/scripts/system/audio_control.sh speaker",
-  "return-type": "json",
-  "on-click": "~/dotfiles/scripts/system/audio_control.sh  toggle-speaker",
-  "on-click-right": "pavucontrol -t 3",
-  "interval": 1,
-  "tooltip": false
+"custom/power": {
+  "format": " [SYSTEM_HALT] ",
+  "tooltip": false,
+  "on-click": "/home/vyeos/dotfiles/scripts/system/powermenu.sh"
 },
 }

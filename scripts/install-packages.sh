@@ -18,6 +18,7 @@ sudo pacman -Syu --noconfirm hyprland kitty waybar \
     xdg-desktop-portal-hyprland pipewire\
     imv mpv bat file \
     rclone fuse3\
+    cpupower tlp \
 
 git clone https://aur.archlinux.org/yay-bin.git
 cd yay-bin

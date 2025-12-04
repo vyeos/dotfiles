@@ -34,6 +34,8 @@ fi
 rm -rf "$HOME/.zshrc"
 ln -s "$HOME/dotfiles/config/.zshrc" "$HOME/.zshrc"
 
+sudo cpupower frequency-set -g schedutil
+
 echo "Setting fzf..."
 source <(fzf --zsh)
 
@@ -63,4 +65,56 @@ echo "HandleLidSwitch=suspend"
 
 nvim /etc/systemd/logind.conf
 
+echo "Doing shit from claude..."
+echo "sudo visudo -f /etc/sudoers.d/power-management"
+# %wheel ALL=(ALL) NOPASSWD: /usr/bin/tee /sys/devices/system/cpu/cpu*/cpufreq/scaling_governor
+# %wheel ALL=(ALL) NOPASSWD: /usr/bin/cpupower
+# %wheel ALL=(ALL) NOPASSWD: /usr/bin/iw
+# %wheel ALL=(ALL) NOPASSWD: /usr/bin/tee /sys/bus/usb/devices/*/power/control
+# %wheel ALL=(ALL) NOPASSWD: /usr/bin/tee /sys/class/scsi_host/host*/link_power_management_policy
+# %wheel ALL=(ALL) NOPASSWD: /usr/bin/tee /proc/sys/vm/dirty_writeback_centisecs
+
+echo "nvim /etc/default/grub"
+echo "in GRUB_CMDLINE_LINUX: pcie_aspm=force intel_pstate=passive"
+
+echo "sudo systemctl enable tlp.service
+sudo systemctl start tlp.service"
+
+
+echo "Edit /etc/tlp.conf"
+echo "
+# CPU
+CPU_SCALING_GOVERNOR_ON_AC=schedutil
+CPU_SCALING_GOVERNOR_ON_BAT=powersave
+CPU_ENERGY_PERF_POLICY_ON_BAT=power
+
+# WiFi
+WIFI_PWR_ON_AC=off
+WIFI_PWR_ON_BAT=on
+
+# Runtime PM
+RUNTIME_PM_ON_AC=auto
+RUNTIME_PM_ON_BAT=auto
+"
+
+echo "
+# Check what's running
+systemctl --user list-units --type=service --state=running
+
+# Example: Disable unused daemons
+systemctl --user disable spotify-player.service 2>/dev/null
+"
+
+echo "
+firefox - about: config
+gfx.webrender.all = true
+layers.acceleration.force-enabled = true
+media.ffmpeg.vaapi.enabled = true
+media.hardware-video-decoding.force-enabled = true
+"
+
+echo "sudo nvim /etc/default/cpupower
+governor='schedutil'
+sudo systemctl enable --now cpupower
+"
 

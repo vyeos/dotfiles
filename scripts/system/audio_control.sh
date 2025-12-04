@@ -1,21 +1,44 @@
 #!/usr/bin/env bash
 
-# Content will be "1" (Muted) or "0" (Unmuted)
+# Optimized audio control with caching to reduce wpctl calls
 STATE_FILE="/tmp/mic_last_state"
+CACHE_FILE="/tmp/audio_cache"
+CACHE_TIMEOUT=1  # 1 second cache
 
-get_status() {
-    # Returns "muted" or "unmuted" based on the target (@SINK@ or @SOURCE@)
-    local STATUS=$(wpctl get-volume $1)
-    if [[ $STATUS == *"[MUTED]"* ]]; then
+get_cached_status() {
+    local target=$1
+    local cache_key="${target}_status"
+    local current_time=$(date +%s)
+    
+    if [[ -f "$CACHE_FILE" ]]; then
+        local cache_time=$(stat -c %Y "$CACHE_FILE" 2>/dev/null || echo 0)
+        if (( current_time - cache_time < CACHE_TIMEOUT )); then
+            grep "^${cache_key}=" "$CACHE_FILE" 2>/dev/null | cut -d'=' -f2
+            return 0
+        fi
+    fi
+    
+    # Cache miss - fetch and store
+    local status=$(wpctl get-volume "$target")
+    mkdir -p "$(dirname "$CACHE_FILE")"
+    
+    if [[ $status == *"[MUTED]"* ]]; then
+        echo "${cache_key}=muted" >> "$CACHE_FILE"
         echo "muted"
     else
+        local vol=$(echo "$status" | awk '{print int($2 * 100)}')
+        echo "${cache_key}=unmuted" >> "$CACHE_FILE"
+        echo "${cache_key}_vol=${vol}" >> "$CACHE_FILE"
         echo "unmuted"
     fi
 }
 
+invalidate_cache() {
+    rm -f "$CACHE_FILE"
+}
+
 case $1 in
     "speaker")
-        # --- DISPLAY LOGIC (Same as before) ---
         VOL_STR=$(wpctl get-volume @DEFAULT_AUDIO_SINK@)
         if [[ $VOL_STR == *"[MUTED]"* ]]; then
             TEXT="AUD: MUTE"
@@ -31,7 +54,6 @@ case $1 in
         ;;
 
     "mic")
-        # --- DISPLAY LOGIC (Same as before) ---
         VOL_STR=$(wpctl get-volume @DEFAULT_AUDIO_SOURCE@)
         if [[ $VOL_STR == *"[MUTED]"* ]]; then
             TEXT="MIC: MUTE"
@@ -44,49 +66,38 @@ case $1 in
         ;;
 
     "toggle-speaker")
-        # --- SMART LOGIC ---
-        SINK_STATUS=$(get_status @DEFAULT_AUDIO_SINK@)
-        MIC_STATUS=$(get_status @DEFAULT_AUDIO_SOURCE@)
+        invalidate_cache
+        SINK_STATUS=$(get_cached_status @DEFAULT_AUDIO_SINK@)
+        MIC_STATUS=$(get_cached_status @DEFAULT_AUDIO_SOURCE@)
 
         if [ "$SINK_STATUS" == "unmuted" ]; then
-            # CASE: Muting the System
-            # 1. Save current Mic state to file so we remember it later
             if [ "$MIC_STATUS" == "muted" ]; then
                 echo "1" > "$STATE_FILE"
             else
                 echo "0" > "$STATE_FILE"
             fi
             
-            # 2. Mute BOTH
             wpctl set-mute @DEFAULT_AUDIO_SINK@ 1
             wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1
         else
-            # CASE: Unmuting the System
-            # 1. Unmute Speaker
             wpctl set-mute @DEFAULT_AUDIO_SINK@ 0
             
-            # 2. Restore Mic State
             if [ -f "$STATE_FILE" ]; then
                 LAST_STATE=$(cat "$STATE_FILE")
-                # Apply the saved state (0 = Unmute, 1 = Mute)
                 wpctl set-mute @DEFAULT_AUDIO_SOURCE@ "$LAST_STATE"
             else
-                # Default safety: If no file exists, keep mic muted
                 wpctl set-mute @DEFAULT_AUDIO_SOURCE@ 1
             fi
         fi
         ;;
 
     "toggle-mic")
-        # --- BLOCKING LOGIC ---
-        SINK_STATUS=$(get_status @DEFAULT_AUDIO_SINK@)
+        invalidate_cache
+        SINK_STATUS=$(get_cached_status @DEFAULT_AUDIO_SINK@)
 
         if [ "$SINK_STATUS" == "muted" ]; then
-            # Case: Speakers are OFF. Block the action.
-            # Optional: Send a notification saying why
             notify-send -u low "Sevastopol Audio" "Cannot enable Mic while System Audio is Muted."
         else
-            # Case: Speakers are ON. Allow Toggle.
             wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
         fi
         ;;

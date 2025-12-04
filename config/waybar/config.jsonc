@@ -2,42 +2,26 @@
   "layer": "top",
   "position": "top",
   "height": 32,
-  "spacing": 0, // No spacing, continuous bar
+  "spacing": 0,
   "margin-top": 0,
   "margin-left": 0,
   "margin-right": 0,
 
-  // --- LAYOUT ---
   "modules-left": [
-    "custom/header",
     "hyprland/workspaces",
-    // "custom/separator",
-    "network",
-    "bluetooth"
+    "group/hardware",
   ],
   "modules-center": [
     "clock"
   ],
   "modules-right": [
-    "group/hardware",
     "custom/recording",
     "custom/audio_mic",
-    "custom/kbd_backlight",
+    "network",
+    "bluetooth",
     "battery",
     "custom/power"
   ],
-
-  // --- MODULES ---
-
-  "custom/header": {
-  "format": " // SEVASTOPOL",
-  "tooltip": false
-},
-
-"custom/separator": {
-  "format": "|",
-  "tooltip": false
-},
 
 "hyprland/workspaces": {
   "on-click": "activate",
@@ -48,13 +32,14 @@
 },
 
 "bluetooth": {
-  "format": "COM: IDLE",           // Controller on, no device connected
-  "format-disabled": "COM: OFF",   // Controller powered off (rfkill)
-  "format-off": "COM: OFF",        // Fallback
-  "format-connected": "COM: {device_alias}", // Device connected
+  "format": "COM: IDLE",
+  "format-disabled": "COM: OFF",
+  "format-off": "COM: OFF",
+  "format-connected": "COM: {device_alias}",
   "on-click": "rfkill toggle bluetooth",
   "on-click-right": "~/dotfiles/scripts/system/focus_or_launch.sh sys_bt 'kitty --class sys_bt -e bluetui'",
-  "max-length": 15
+  "max-length": 15,
+  "interval": 30
 },
 
 "network": {
@@ -65,37 +50,39 @@
   "tooltip-format-wifi": "Signal: {signalStrength}%",
   "on-click": "rfkill toggle wifi",
   "on-click-right": "~/dotfiles/scripts/system/focus_or_launch.sh sys_wifi 'kitty --class sys_wifi -e impala'",
-  "max-length": 20
+  "max-length": 20,
+  "interval": 30
 },
 
 "clock": {
-  "interval": 1,
-  "format": "T-TIME: {:%H:%M:%S}",
+  "interval": 60,
+  "format": "{:%a %H:%M}",
   "tooltip-format": "{:%A, %d-%m-%Y}"
 },
 
 "group/hardware": {
-    "orientation": "horizontal",
-    "drawer": {
-        "transition-duration": 500,
-        "children-class": "not-memory",
-        "transition-left-to-right": false
-    },
-    "modules": [
-        "custom/arrow-icon",
-        "custom/audio_speaker",
-        "custom/kbd_backlight"
-    ]
+  "orientation": "horizontal",
+  "drawer": {
+    "transition-duration": 500,
+    "children-class": "not-memory",
+    "transition-left-to-right": true
+  },
+  "modules": [
+    "custom/arrow-icon",
+    "custom/audio_speaker",
+    "backlight",
+      "custom/kbd_backlight",
+  ]
 },
 
 "custom/arrow-icon": {
-    "format": "  ",
-    "tooltip": false
+  "format": "  ",
+  "tooltip": false
 },
 
 "custom/recording": {
   "format": "REC: ON",
-  "interval": 1,
+  "interval": 5,
   "exec": "echo 'REC: ON'",
   "exec-if": "pgrep wf-recorder",
   "tooltip": false
@@ -105,28 +92,27 @@
   "exec": "~/dotfiles/scripts/system/audio_control.sh mic",
   "return-type": "json",
   "on-click": "~/dotfiles/scripts/system/audio_control.sh toggle-mic",
-  "interval": 1,
+  "interval": 3,
   "tooltip": false
 },
 
 "custom/audio_speaker": {
   "exec": "~/dotfiles/scripts/system/audio_control.sh speaker",
   "return-type": "json",
-  "on-click": "~/dotfiles/scripts/system/audio_control.sh  toggle-speaker",
+  "on-click": "~/dotfiles/scripts/system/audio_control.sh toggle-speaker",
   "on-click-right": "pavucontrol -t 3",
-  "interval": 1,
+  "interval": 3,
   "tooltip": false
 },
 
 "custom/kbd_backlight": {
   "exec": "brightnessctl -d kbd_backlight i | grep -oP '\\d+%'",
-  "interval": 5,
+  "interval": 10,
   "format": "KBD: {}",
   "on-click": "~/dotfiles/scripts/system/kbd-backlight.sh toggle",
   "on-click-right": "~/dotfiles/scripts/system/kbd-backlight.sh gui",
   "tooltip": false
 },
-
 
 "backlight": {
   "format": "LUM: {percent}%",
@@ -134,7 +120,7 @@
 },
 
 "battery": {
-  "interval": 5,
+  "interval": 30,
   "states": {
     "warning": 20,
     "critical": 10
@@ -148,12 +134,11 @@
   "tooltip-format-charging": "Input: {power}W",
   "tooltip-format-full": "Power Source: External",
   "tooltip-format": "Draw: {power}W",
-  "on-click": "~/dotfiles/scripts/system/powersave.sh"
 },
 
-"custom/power": {
-  "format": " [SYSTEM_HALT] ",
-  "tooltip": false,
-  "on-click": "/home/vyeos/dotfiles/scripts/system/powermenu.sh"
-},
+  "custom/power": {
+    "format": " [SYSTEM_HALT] ",
+    "tooltip": false,
+    "on-click": "/home/vyeos/dotfiles/scripts/system/powermenu.sh"
+  }
 }

@@ -134,11 +134,29 @@ window#waybar {
 }
 
 /* Network Logic */
-#network {
+/* "Standby" - Tungsten White */
+#network,
+#bluetooth,
+#network.disconnected,
+#bluetooth.discoverable {
+  color: #e0e0e0;
+}
+
+/* "Link Established" - Amber */
+#network.wifi,
+#network.ethernet,
+#network.linked,
+#bluetooth.connected {
   color: #ffb86c;
 }
-#network.disconnected {
+
+/* "System Failure/Offline" - Red with Dark Background */
+#network.disabled,
+#network.off,
+#bluetooth.off,
+#bluetooth.disabled {
   color: #ff5555;
+  background-color: #1a0000; /* Dark Red Warning BG */
 }
 
 /* Recording State */

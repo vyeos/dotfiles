@@ -94,24 +94,26 @@
   "tooltip": false
 },
 
-"network": {
-  "format-wifi": "NET: {essid}",
-  "format-ethernet": "NET: WIRED",
-  "format-disconnected": "NET: OFFLINE",
-  "tooltip-format": "Signal: {signalStrength}%",
-  "on-click": "~/dotfiles/scripts/system/focus_or_launch.sh sys_wifi 'kitty --class sys_wifi -e impala'",
-  "max-length": 20
-},
-
 "bluetooth": {
-  "format": "COM: ON",
-  "format-disabled": "COM: OFF",
-  "format-connected": "COM: {device_alias}",
-  "tooltip-format": "{controller_alias}\t{controller_address}",
-  "on-click": "~/dotfiles/scripts/system/focus_or_launch.sh sys_bt 'kitty --class sys_bt -e bluetui'",
-  "max-length": 15
+    "format": "COM: IDLE",           // Controller on, no device connected
+    "format-disabled": "COM: OFF",   // Controller powered off (rfkill)
+    "format-off": "COM: OFF",        // Fallback
+    "format-connected": "COM: {device_alias}", // Device connected
+    "on-click": "rfkill toggle bluetooth",
+    "on-click-right": "~/dotfiles/scripts/system/focus_or_launch.sh sys_bt 'kitty --class sys_bt -e bluetui'",
+    "max-length": 15
 },
 
+"network": {
+    "format-wifi": "NET: {essid}",
+    "format-ethernet": "NET: WIRED",
+    "format-disconnected": "NET: IDLE",
+    "format-disabled": "NET: OFF",
+    "tooltip-format-wifi": "Signal: {signalStrength}%",
+    "on-click": "rfkill toggle wifi",
+    "on-click-right": "~/dotfiles/scripts/system/focus_or_launch.sh sys_wifi 'kitty --class sys_wifi -e impala'",
+    "max-length": 20
+},
 
 "backlight": {
   "format": "LUM: {percent}%"

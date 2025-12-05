@@ -63,6 +63,7 @@ return {
 				"pylsp",
 				-- "clangd", installed manually in arch
 				"tailwindcss",
+				"rust-analyser",
 			},
 			automatic_enable = true,
 		})

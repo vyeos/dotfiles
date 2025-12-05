@@ -16,7 +16,6 @@ alias shadcn="pnpm dlx shadcn@latest"
 alias ghconf="nvim ~/.config/ghostty/config"
 alias cdgd="cd /Users/rudra/Library/CloudStorage/GoogleDrive-rudranpatel0980@gmail.com/My\ Drive"
 alias btop="btop --force-utf"
-alias open="thunar"
 alias zat="zathura"
 alias img="kitten icat"
 
@@ -105,5 +104,4 @@ case ":$PATH:" in
 esac
 
 export PATH="$HOME/.cargo/bin:$PATH"
-
 

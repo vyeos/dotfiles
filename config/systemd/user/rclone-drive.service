@@ -1,0 +1,24 @@
+[Unit]
+Description=Google Drive Mount
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+# "notify" means systemd waits for the mount to be ready before moving on
+Type=notify
+
+# The actual command (Note: NO --daemon flag here)
+ExecStart=/usr/bin/rclone mount google-drive: %h/google-drive \
+  --vfs-cache-mode full \
+  --log-level INFO \
+  --log-file %h/.rclone.log
+
+# Clean unmount when you stop the service
+ExecStop=/usr/bin/fusermount -u %h/google-drive
+
+# Auto-restart if it crashes
+Restart=on-failure
+RestartSec=10
+
+[Install]
+WantedBy=default.target

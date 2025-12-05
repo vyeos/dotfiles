@@ -1,7 +1,7 @@
 #! /usr/bin/bash
 
 cd ~
-sudo pacman -Syu --noconfirm hyprland kitty waybar \
+sudo pacman -Syu --noconfirm kitty waybar lazygit\
     neovim git curl btop base-devel \
     cliphist wl-clipboard wl-clip-persist satty hypridle hyprlock \
     yad dunst fastfetch ttf-jetbrains-mono-nerd noto-fonts-emoji \
@@ -13,7 +13,7 @@ sudo pacman -Syu --noconfirm hyprland kitty waybar \
     tumbler ffmpegthumbnailer poppler-glib\
     qt5-wayland qt6-wayland brightnessctl \
     nodejs npm imagemagick fzf \
-    cups system-config-printer gutenprint \
+    cups system-config-printer gutenprint zathura sudo \
     spotify-player wf-recorder ffmpeg libreoffice-fresh \
     xdg-desktop-portal-hyprland pipewire\
     imv mpv bat file \
@@ -26,7 +26,8 @@ makepkg -si --noconfirm
 cd ..
 rm -rf yay-bin
 
-yay -Syu --noconfirm hyprpaper hyprpicker-git github-cli hyprpolkitagent localsend-bin losslesscut-bin
+yay --noconfirm -Syu hyprpaper hyprpicker-git github-cli hyprpolkitagent localsend-bin losslesscut-bin
 
 sudo pacman -Syu --noconfirm
 yay -Syu --noconfirm
+echo "sudo pacman zathura-pdf-mupdf"

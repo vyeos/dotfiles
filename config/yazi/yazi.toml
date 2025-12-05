@@ -1,0 +1,51 @@
+[opener]
+edit = [
+{ run = 'nvim "$@"', block = true, desc = "Neovim" },
+]
+
+play = [
+{ run = 'mpv "$@"', orphan = true, desc = "Play in MPV" }
+]
+
+# Fixed syntax and added flag for satty
+img = [
+{ run = 'satty --filename "$@"', orphan = true, desc = "Satty" }
+]
+
+# Added Zathura for PDFs
+pdf = [
+{ run = 'zathura "$@"', orphan = true, desc = "Zathura" }
+]
+
+# Added LibreOffice for documents
+office = [
+{ run = 'libreoffice "$@"', orphan = true, desc = "LibreOffice" }
+]
+
+open = [
+{ run = 'xdg-open "$@"', desc = "Open", orphan = true },
+]
+
+[open]
+rules = [
+  # 1. Specific file extensions (High Priority)
+{ name = "*.json", use = "edit" },
+{ name = "*.md",   use = "edit" },
+{ name = "*.pdf",  use = "pdf" },
+
+  # Office Documents
+{ name = "*.docx", use = "office" },
+{ name = "*.pptx", use = "office" },
+{ name = "*.xlsx", use = "office" },
+{ name = "*.odt",  use = "office" },
+{ name = "*.ods",  use = "office" },
+{ name = "*.odp",  use = "office" },
+
+  # 2. Mime Types (Broad Categories)
+{ mime = "text/*",  use = "edit" },
+{ mime = "image/*", use = "img" },
+{ mime = "video/*", use = "play" },
+
+  # 3. Fallback
+{ name = "*", use = "open" }
+]

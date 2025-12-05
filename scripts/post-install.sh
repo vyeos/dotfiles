@@ -34,7 +34,7 @@ fi
 rm -rf "$HOME/.zshrc"
 ln -s "$HOME/dotfiles/config/.zshrc" "$HOME/.zshrc"
 
-sudo cpupower frequency-set -g schedutil
+#sudo cpupower frequency-set -g schedutil
 
 echo "Setting fzf..."
 source <(fzf --zsh)
@@ -48,10 +48,10 @@ sudo ln -sf /usr/bin/ffmpeg /usr/share/losslesscut/resources/ffmpeg
 sudo ln -sf /usr/bin/ffprobe /usr/share/losslesscut/resources/ffprobe
 
 echo "Setting defualt web browser..."
-xdg-settings set default-web-browser firefox.desktop
-xdg-mime default firefox.desktop x-scheme-handler/http
-xdg-mime default firefox.desktop x-scheme-handler/https
-xdg-mime default firefox.desktop text/html
+#xdg-settings set default-web-browser firefox.desktop
+#xdg-mime default firefox.desktop x-scheme-handler/http
+#xdg-mime default firefox.desktop x-scheme-handler/https
+#xdg-mime default firefox.desktop text/html
 
 echo "Setting up rclone..."
 rclone config
@@ -63,7 +63,7 @@ echo "Setup Complete! Please restart your shell or log out."
 
 echo "HandleLidSwitch=suspend"
 
-nvim /etc/systemd/logind.conf
+sudo nvim /etc/systemd/logind.conf
 
 echo "Doing shit from claude..."
 echo "sudo visudo -f /etc/sudoers.d/power-management"

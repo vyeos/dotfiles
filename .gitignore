@@ -1,2 +1,4 @@
 ./config/nvim/lua/.DS_Store
 rClone-googleproject.json
+rustlings/Cargo.lock
+rustlings/target/
